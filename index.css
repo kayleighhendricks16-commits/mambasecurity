@@ -133,6 +133,7 @@ strong {
     box-shadow: 0 0 15px rgba(153, 255, 0, 0.3);
     border: 2px solid var(--mamba-green);
     font-family: 'Montserrat', sans-serif;
+    margin-top: 30px; /* Added space above button */
 }
 
 .btn-whatsapp:hover {
@@ -165,7 +166,7 @@ strong {
     box-shadow: 0 8px 20px rgba(153, 255, 0, 0.5);
 }
 
-/* ===== IMAGE OVERLAY BUTTON STYLES ===== */
+/* ===== UPDATED IMAGE OVERLAY BUTTON STYLES - AT BOTTOM ===== */
 .image-overlay-container {
     position: relative;
     overflow: hidden;
@@ -184,11 +185,12 @@ strong {
     text-decoration: none;
 }
 
+/* UPDATED: Button at bottom of image */
 .image-overlay-btn {
     position: absolute;
-    top: 50%;
+    bottom: 20px; /* Changed from top: 50% */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%); /* Changed from translate(-50%, -50%) */
     background: var(--mamba-green);
     color: var(--mamba-dark);
     padding: clamp(14px, 2.5vw, 16px) clamp(25px, 4vw, 35px);
@@ -214,7 +216,7 @@ strong {
 
 .image-overlay-link:hover .image-overlay-btn {
     background: #88dd00;
-    transform: translate(-50%, -50%) translateY(-3px);
+    transform: translateX(-50%) translateY(-3px); /* Updated transform */
     box-shadow: 0 8px 20px rgba(153, 255, 0, 0.5);
 }
 
@@ -765,7 +767,7 @@ body.menu-open {
     left: 8px;
 }
 
-/* ===== HERO SLIDER - FIXED TEXT ALIGNMENT ===== */
+/* ===== UPDATED HERO SLIDER WITH VISIBLE ARROWS ===== */
 .hero {
     position: relative;
     min-height: 80vh;
@@ -827,7 +829,7 @@ body.menu-open {
     position: relative;
     z-index: 2;
     max-width: 1400px;
-    padding: 60px;
+    padding: 60px 60px 60px 100px; /* UPDATED: Added left padding to move text right */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -841,7 +843,7 @@ body.menu-open {
     text-align: left;
 }
 
-/* DESKTOP: Text far left */
+/* UPDATED: Text moved to the right */
 .hero-title {
     font-size: clamp(2rem, 5vw, 3.2rem);
     color: white;
@@ -850,6 +852,7 @@ body.menu-open {
     line-height: 1.2;
     text-align: left;
     max-width: 800px;
+    padding-left: 20px; /* Added padding to move text away from arrows */
 }
 
 .hero-subtitle {
@@ -859,6 +862,7 @@ body.menu-open {
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     text-align: left;
     max-width: 800px;
+    padding-left: 20px; /* Added padding to move text away from arrows */
 }
 
 .hero-description {
@@ -869,6 +873,7 @@ body.menu-open {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     line-height: 1.6;
     text-align: left;
+    padding-left: 20px; /* Added padding to move text away from arrows */
 }
 
 .hero-buttons {
@@ -876,6 +881,42 @@ body.menu-open {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: flex-start;
+    padding-left: 20px; /* Added padding to move buttons away from arrows */
+}
+
+/* Hero Slider Arrows - ALWAYS VISIBLE */
+.hero-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(153, 255, 0, 0.8);
+    color: var(--mamba-dark);
+    border: none;
+    width: clamp(50px, 7vw, 60px);
+    height: clamp(50px, 7vw, 60px);
+    border-radius: 50%;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex !important; /* Force display */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(153, 255, 0, 0.4);
+}
+
+.hero-slider-arrow:hover {
+    background: var(--mamba-green);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 25px rgba(153, 255, 0, 0.6);
+}
+
+.hero-prev {
+    left: 30px;
+}
+
+.hero-next {
+    right: 30px;
 }
 
 .slider-dots {
@@ -1183,7 +1224,7 @@ body.menu-open {
 
 .whatsapp-image-wrapper {
     width: 100%;
-    height: clamp(300px, 40vw, 400px);
+    height: clamp(350px, 45vw, 500px);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
@@ -1343,6 +1384,11 @@ body.menu-open {
 .tribe-cta {
     text-align: center;
     margin-top: 50px;
+}
+
+/* UPDATED: Added space for WhatsApp button in testimonial section */
+.tribe-cta .btn-primary {
+    margin-top: 20px;
 }
 
 /* ===== FAQ SECTION - UPDATED ===== */
@@ -1895,6 +1941,34 @@ body.menu-open {
         max-width: 260px;
     }
     
+    /* Hero Slider Arrows for Tablet - ALWAYS VISIBLE */
+    .hero-slider-arrow {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+        display: flex !important; /* Force display */
+    }
+    
+    .hero-prev {
+        left: 15px;
+    }
+    
+    .hero-next {
+        right: 15px;
+    }
+    
+    /* UPDATED: Move hero text to the right on tablet */
+    .slide-content {
+        padding: 30px 20px 30px 60px !important; /* Added left padding */
+    }
+    
+    .hero-title,
+    .hero-subtitle,
+    .hero-description,
+    .hero-buttons {
+        padding-left: 10px !important;
+    }
+    
     /* Sections - single column on tablet */
     .security-content-wrapper,
     .company-profile-content,
@@ -1978,7 +2052,6 @@ body.menu-open {
     }
     
     .slide-content {
-        padding: 30px 20px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
@@ -2179,6 +2252,33 @@ body.menu-open {
     .mobile-logo-image {
         height: 75px;
         max-width: 220px;
+    }
+    
+    /* Hero Slider Arrows - ALWAYS VISIBLE ON MOBILE */
+    .hero-slider-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+        display: flex !important; /* Force display */
+    }
+    
+    .hero-prev {
+        left: 10px;
+    }
+    
+    .hero-next {
+        right: 10px;
+    }
+    
+    /* UPDATED: Move hero text to the right on mobile */
+    .slide-content {
+        padding: 20px 15px 20px 40px !important; /* Added left padding */
+    }
+    
+    .hero-title,
+    .hero-subtitle,
+    .hero-buttons {
+        padding-left: 5px !important;
     }
     
     .security-content-section,
@@ -2684,3 +2784,4 @@ img {
 .hero-content {
     padding-top: 0 !important;
 }
+
