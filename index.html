@@ -154,9 +154,13 @@
         </div>
     </header>
 
-    <!-- ===== HERO SECTION ===== -->
+    <!-- ===== HERO SECTION WITH ARROWS ===== -->
     <section class="hero" id="home">
         <div class="hero-slider">
+            <button class="hero-slider-arrow hero-prev" aria-label="Previous slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
             <div class="slides-container">
                 <!-- Slide 1 -->
                 <div class="slide active">
@@ -226,6 +230,10 @@
                     </div>
                 </div>
             </div>
+
+            <button class="hero-slider-arrow hero-next" aria-label="Next slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
 
             <!-- Slider Dots -->
             <div class="slider-dots">
@@ -386,15 +394,15 @@
         </div>
     </section>
 
-    <!-- ===== WHATSAPP SECTION ===== -->
+    <!-- ===== WHATSAPP SECTION (UPDATED FOR SPACE) ===== -->
     <section class="whatsapp-section">
         <div class="container">
             <div class="whatsapp-content">
-                <!-- FIXED: "Join the tribe" image now links to WhatsApp -->
+                <!-- FIXED: Larger image and space added -->
                 <div class="whatsapp-image image-overlay-container float-up">
                     <a href="https://wa.me/27833002975?text=Mamba%20App" class="image-overlay-link" target="_blank">
                         <div class="whatsapp-image-wrapper">
-                            <img src="mambaa.avif" alt="Mamba App - Security Network" loading="lazy">
+                            <img src="mapp.avif" alt="Mamba App - Security Network" loading="lazy">
                         </div>
                         <div class="image-overlay-btn always-visible">Join The Tribe</div>
                     </a>
@@ -405,8 +413,8 @@
                     </div>
                     <h2 class="float-up">#JOINTHETRIBE</h2>
                     <p class="float-up">WhatsApp <strong>"Mamba App"</strong> to <a href="tel:0833002975" class="phone-number">083 300 2975</a> for instant access to our security network and emergency security alerts</p>
-                    <!-- FIXED: "Join Our Tribe" button text now in Mamba green color -->
-                    <a href="https://wa.me/27833002975?text=Mamba%20App" class="btn-whatsapp float-up" target="_blank">
+                    <!-- FIXED: Added space above this button -->
+                    <a href="https://wa.me/27833002975?text=Mamba%20App" class="btn-whatsapp float-up whatsapp-button-spacing" target="_blank">
                         Join Our Tribe
                     </a>
                 </div>
@@ -707,11 +715,14 @@
             }
         });
         
-        // ===== HERO SLIDER - FIXED =====
-        const slides = document.querySelectorAll('.hero-slider .slide');
-        const dots = document.querySelectorAll('.hero-slider .dot');
-        let currentSlide = 0;
-        let slideInterval;
+        // ===== HERO SLIDER WITH ARROWS =====
+        const heroSlides = document.querySelectorAll('.hero-slider .slide');
+        const heroDots = document.querySelectorAll('.hero-slider .dot');
+        let heroCurrentSlide = 0;
+        let heroSlideInterval;
+        
+        const heroPrevBtn = document.querySelector('.hero-prev');
+        const heroNextBtn = document.querySelector('.hero-next');
         
         // Pre-load hero images to prevent flash
         const heroImages = ['hero1.jpg', 'hero2.avif', 'hero3.avif', 'hero4.avif'];
@@ -720,61 +731,84 @@
             img.src = imgSrc;
         });
         
-        function showSlide(n) {
+        function showHeroSlide(n) {
             // Hide all slides
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
+            heroSlides.forEach(slide => slide.classList.remove('active'));
+            heroDots.forEach(dot => dot.classList.remove('active'));
             
             // Show current slide
-            slides[n].classList.add('active');
-            dots[n].classList.add('active');
-            currentSlide = n;
+            heroSlides[n].classList.add('active');
+            heroDots[n].classList.add('active');
+            heroCurrentSlide = n;
             
             // Ensure slide background is loaded
-            const currentSlideBg = slides[n].querySelector('.slide-bg');
+            const currentSlideBg = heroSlides[n].querySelector('.slide-bg');
             if (currentSlideBg) {
                 // Force background image to load
                 const bgImage = new Image();
                 bgImage.src = currentSlideBg.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
                 bgImage.onload = function() {
                     // Ensure slide stays visible
-                    slides[n].style.opacity = '1';
-                    slides[n].style.zIndex = '2';
+                    heroSlides[n].style.opacity = '1';
+                    heroSlides[n].style.zIndex = '2';
                 };
             }
         }
         
         // Dot click events
-        dots.forEach((dot, index) => {
+        heroDots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                clearInterval(slideInterval);
-                showSlide(index);
-                startSlider();
+                clearInterval(heroSlideInterval);
+                showHeroSlide(index);
+                startHeroSlider();
             });
         });
         
-        function nextSlide() {
-            let next = currentSlide + 1;
-            if (next >= slides.length) next = 0;
-            showSlide(next);
+        function nextHeroSlide() {
+            let next = heroCurrentSlide + 1;
+            if (next >= heroSlides.length) next = 0;
+            showHeroSlide(next);
         }
         
-        function startSlider() {
-            slideInterval = setInterval(nextSlide, 5000);
+        function prevHeroSlide() {
+            let prev = heroCurrentSlide - 1;
+            if (prev < 0) prev = heroSlides.length - 1;
+            showHeroSlide(prev);
+        }
+        
+        function startHeroSlider() {
+            heroSlideInterval = setInterval(nextHeroSlide, 5000);
+        }
+        
+        // Arrow click events
+        if (heroPrevBtn) {
+            heroPrevBtn.addEventListener('click', () => {
+                clearInterval(heroSlideInterval);
+                prevHeroSlide();
+                startHeroSlider();
+            });
+        }
+        
+        if (heroNextBtn) {
+            heroNextBtn.addEventListener('click', () => {
+                clearInterval(heroSlideInterval);
+                nextHeroSlide();
+                startHeroSlider();
+            });
         }
         
         // Start slider
-        showSlide(0);
-        startSlider();
+        showHeroSlide(0);
+        startHeroSlider();
         
         // Pause slider on hover
         const heroSlider = document.querySelector('.hero-slider');
         heroSlider.addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
+            clearInterval(heroSlideInterval);
         });
         
         heroSlider.addEventListener('mouseleave', () => {
-            startSlider();
+            startHeroSlider();
         });
         
         // ===== POPUP - FIXED VERSION =====
@@ -873,8 +907,8 @@
             
             // Initialize hero slider to prevent background flash
             setTimeout(() => {
-                slides[0].style.opacity = '1';
-                slides[0].style.zIndex = '2';
+                heroSlides[0].style.opacity = '1';
+                heroSlides[0].style.zIndex = '2';
                 
                 // Force body background to black
                 document.body.style.backgroundColor = '#000000';
@@ -1105,6 +1139,6 @@
         });
     </script>
 </body>
-
 </html>
+
 
