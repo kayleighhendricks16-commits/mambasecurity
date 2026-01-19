@@ -1865,7 +1865,7 @@ body.menu-open {
 }
 
 .cookie-consent-text p {
-    color: #000000; /* Black text */
+    color: #FFFFFF; /* Black text */
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 10px;
@@ -3225,6 +3225,7 @@ img {
         transform: scale(1.15) !important;
     }
 }
+
 
 
 
