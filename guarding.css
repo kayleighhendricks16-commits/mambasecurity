@@ -117,6 +117,20 @@ strong {
     box-shadow: 0 8px 20px rgba(153, 255, 0, 0.5);
 }
 
+/* ===== EMERGENCY BUTTONS ICON SPACING ===== */
+.emergency-buttons .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: clamp(12px, 3vw, 14px) clamp(25px, 4vw, 40px);
+}
+
+.emergency-buttons .btn i {
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
 /* ===== WHATSAPP FLOATING BUTTON ===== */
 .whatsapp-float {
     position: fixed;
@@ -731,35 +745,6 @@ strong {
     margin-top: 30px;
     flex-wrap: wrap;
 }
-/* ===== EMERGENCY BUTTONS ICON SPACING ===== */
-.emergency-buttons .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    padding: clamp(12px, 3vw, 14px) clamp(25px, 4vw, 40px);
-}
-
-.emergency-buttons .btn i {
-    font-size: 1.2em;
-    flex-shrink: 0;
-}
-
-/* For mobile, adjust spacing */
-@media (max-width: 767px) {
-    .emergency-buttons .btn {
-        gap: 12px;
-        padding: 14px 25px;
-    }
-}
-
-@media (max-width: 424px) {
-    .emergency-buttons .btn {
-        gap: 10px;
-        padding: 12px 20px;
-    }
-}
-
 
 /* ===== FLOAT UP ANIMATION ===== */
 .float-on-scroll {
@@ -1064,6 +1049,281 @@ strong {
     text-shadow: 0 0 10px rgba(153, 255, 0, 0.3);
 }
 
+/* ===== MOBILE-SPECIFIC IMAGE ADJUSTMENTS ===== */
+/* For very small phones (under 425px) */
+@media (max-width: 424px) {
+    /* Make AD HOC image (adhoc.png) much bigger on mobile */
+    .service-section-ar:nth-child(5) .service-image-ar {
+        min-height: 380px !important;
+        max-height: 450px !important;
+        padding: 10px !important;
+    }
+    
+    .service-section-ar:nth-child(5) .service-image-ar img {
+        max-width: 95% !important;
+        max-height: 95% !important;
+        object-fit: contain !important;
+    }
+    
+    /* Make Secure Estates image (SE.avif) much bigger on mobile */
+    .service-section-ar:nth-child(3) .service-image-ar {
+        min-height: 420px !important;
+        max-height: 500px !important;
+        padding: 10px !important;
+    }
+    
+    .service-section-ar:nth-child(3) .service-image-ar img {
+        max-width: 90% !important;
+        max-height: 90% !important;
+        object-fit: contain !important;
+    }
+    
+    /* Button spacing adjustments for very small phones */
+    .emergency-buttons .btn {
+        gap: 10px;
+        padding: 12px 20px;
+    }
+}
+
+/* For small phones (375px - 424px) */
+@media (max-width: 424px) and (min-width: 375px) {
+    /* AD HOC image */
+    .service-section-ar:nth-child(5) .service-image-ar {
+        min-height: 400px !important;
+        max-height: 470px !important;
+        padding: 12px !important;
+    }
+    
+    /* Secure Estates image */
+    .service-section-ar:nth-child(3) .service-image-ar {
+        min-height: 450px !important;
+        max-height: 530px !important;
+        padding: 12px !important;
+    }
+}
+
+/* For medium phones (425px - 599px) */
+@media (max-width: 599px) and (min-width: 425px) {
+    /* AD HOC image */
+    .service-section-ar:nth-child(5) .service-image-ar {
+        min-height: 380px !important;
+        max-height: 450px !important;
+        padding: 15px !important;
+    }
+    
+    .service-section-ar:nth-child(5) .service-image-ar img {
+        max-width: 90% !important;
+        max-height: 90% !important;
+    }
+    
+    /* Secure Estates image */
+    .service-section-ar:nth-child(3) .service-image-ar {
+        min-height: 450px !important;
+        max-height: 520px !important;
+        padding: 15px !important;
+    }
+    
+    .service-section-ar:nth-child(3) .service-image-ar img {
+        max-width: 85% !important;
+        max-height: 85% !important;
+    }
+    
+    /* Button spacing adjustments */
+    .emergency-buttons .btn {
+        gap: 10px;
+        padding: 12px 20px;
+    }
+}
+
+/* For large phones (600px - 767px) */
+@media (max-width: 767px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .logo {
+        order: 3;
+        margin-left: auto;
+        margin-right: 0;
+        padding: 15px 0;
+    }
+    
+    .logo-image {
+        height: 75px;
+        max-width: 220px;
+    }
+    
+    .mobile-logo-image {
+        height: 75px;
+        max-width: 220px;
+    }
+    
+    .armed-response-hero {
+        padding: 80px 0 40px;
+        min-height: 60vh;
+    }
+    
+    .armed-response-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .service-sections-container {
+        padding: 40px 0;
+    }
+    
+    .service-section-ar {
+        gap: 30px;
+    }
+    
+    .service-header-ar h2 {
+        font-size: 1.6rem;
+    }
+    
+    .service-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        padding: 6px;
+    }
+    
+    .service-header-ar {
+        gap: 15px;
+    }
+    
+    .service-image-ar {
+        min-height: 300px;
+        max-height: 380px;
+    }
+    
+    /* Specific adjustments for SE.avif on large phones */
+    .service-section-ar:nth-child(3) .service-image-ar {
+        min-height: 400px !important;
+        max-height: 480px !important;
+        padding: 15px !important;
+    }
+    
+    .service-section-ar:nth-child(3) .service-image-ar img {
+        max-width: 75% !important;
+        max-height: 75% !important;
+    }
+    
+    /* Specific adjustments for adhoc.png on large phones */
+    .service-section-ar:nth-child(5) .service-image-ar {
+        min-height: 350px !important;
+        max-height: 420px !important;
+        padding: 10px !important;
+    }
+    
+    .service-section-ar:nth-child(5) .service-image-ar img {
+        max-width: 80% !important;
+        max-height: 80% !important;
+    }
+    
+    .service-section-ar:nth-child(1) .service-image-ar,
+    .service-section-ar:nth-child(2) .service-image-ar,
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 300px;
+        max-height: 380px;
+    }
+    
+    .service-image-ar .overlay-btn {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        min-width: 200px;
+    }
+    
+    .emergency-cta {
+        padding: 50px 0;
+    }
+    
+    .emergency-cta h2 {
+        font-size: 1.8rem;
+    }
+    
+    .emergency-number {
+        font-size: 2.2rem;
+    }
+    
+    .emergency-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .emergency-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+        gap: 12px;
+        padding: 14px 25px;
+    }
+    
+    /* FOOTER FIXES FOR MOBILE */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-logo-image {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .footer-brand p,
+    .tribe-footer p,
+    .footer-contact-info p,
+    .footer-services a,
+    .footer-resources a {
+        text-align: center;
+    }
+    
+    /* SOCIAL ICONS - CENTERED AND IN ONE LINE ON MOBILE */
+    .social-icons {
+        justify-content: center;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 5px 0;
+    }
+    
+    .social-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+    
+    .footer-services ul,
+    .footer-resources ul {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .footer-contact-info p {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .footer-contact-info i {
+        margin-top: 0;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .footer-links a {
+        display: block;
+        margin: 0;
+    }
+    
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 65px;
+        height: 65px;
+    }
+}
+
 /* =========================================== */
 /* ========== RESPONSIVE DESIGN - FIXED ========== */
 /* =========================================== */
@@ -1176,34 +1436,42 @@ strong {
         max-height: 450px;
     }
     
-  /* ===== SIMPLIFIED MOBILE IMAGE FIX ===== */
-@media (max-width: 767px) {
-    /* Make AD HOC image (5th section) bigger on all mobile devices */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 400px !important;
-        max-height: 500px !important;
-        padding: 5px !important;
-    }
-    
-    .service-section-ar:nth-child(5) .service-image-ar img {
-        max-width: 95% !important;
-        max-height: 95% !important;
-        object-fit: contain !important;
-    }
-    
-    /* Make Secure Estates image (3rd section) bigger on all mobile devices */
+    /* Specific adjustments for SE.avif on tablet */
     .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 450px !important;
-        max-height: 550px !important;
-        padding: 5px !important;
+        min-height: 450px;
+        max-height: 550px;
+        padding: 20px;
     }
     
     .service-section-ar:nth-child(3) .service-image-ar img {
-        max-width: 90% !important;
-        max-height: 90% !important;
-        object-fit: contain !important;
+        max-width: 80%;
+        max-height: 80%;
     }
-}
+    
+    /* Specific adjustments for adhoc.png on tablet */
+    .service-section-ar:nth-child(5) .service-image-ar {
+        min-height: 380px;
+        max-height: 480px;
+        padding: 15px;
+    }
+    
+    .service-section-ar:nth-child(5) .service-image-ar img {
+        max-width: 85%;
+        max-height: 85%;
+    }
+    
+    .service-section-ar:nth-child(1) .service-image-ar,
+    .service-section-ar:nth-child(2) .service-image-ar,
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 350px;
+        max-height: 450px;
+    }
+    
+    .service-image-ar .overlay-btn {
+        padding: 14px 30px;
+        font-size: 1.2rem;
+        min-width: 220px;
+    }
     
     /* FOOTER FIXES FOR TABLET */
     .footer-content {
@@ -1322,193 +1590,6 @@ strong {
     }
 }
 
-/* LARGE PHONES (600px - 767px) */
-@media (max-width: 767px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .logo {
-        order: 3;
-        margin-left: auto;
-        margin-right: 0;
-        padding: 15px 0;
-    }
-    
-    .logo-image {
-        height: 75px;
-        max-width: 220px;
-    }
-    
-    .mobile-logo-image {
-        height: 75px;
-        max-width: 220px;
-    }
-    
-    .armed-response-hero {
-        padding: 80px 0 40px;
-        min-height: 60vh;
-    }
-    
-    .armed-response-hero h1 {
-        font-size: 2rem;
-    }
-    
-    .service-sections-container {
-        padding: 40px 0;
-    }
-    
-    .service-section-ar {
-        gap: 30px;
-    }
-    
-    .service-header-ar h2 {
-        font-size: 1.6rem;
-    }
-    
-    .service-icon-wrapper {
-        width: 60px;
-        height: 60px;
-        padding: 6px;
-    }
-    
-    .service-header-ar {
-        gap: 15px;
-    }
-    
-    .service-image-ar {
-        min-height: 300px;
-        max-height: 380px;
-    }
-    
-    /* Specific adjustments for SE.avif on large phones */
-    .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 400px;
-        max-height: 480px;
-        padding: 15px;
-    }
-    
-    .service-section-ar:nth-child(3) .service-image-ar img {
-        max-width: 75%;
-        max-height: 75%;
-    }
-    
-    /* Specific adjustments for adhoc.png on large phones */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 350px;
-        max-height: 420px;
-        padding: 10px;
-    }
-    
-    .service-section-ar:nth-child(5) .service-image-ar img {
-        max-width: 80%;
-        max-height: 80%;
-    }
-    
-    .service-section-ar:nth-child(1) .service-image-ar,
-    .service-section-ar:nth-child(2) .service-image-ar,
-    .service-section-ar:nth-child(4) .service-image-ar {
-        min-height: 300px;
-        max-height: 380px;
-    }
-    
-    .service-image-ar .overlay-btn {
-        padding: 12px 25px;
-        font-size: 1.1rem;
-        min-width: 200px;
-    }
-    
-    .emergency-cta {
-        padding: 50px 0;
-    }
-    
-    .emergency-cta h2 {
-        font-size: 1.8rem;
-    }
-    
-    .emergency-number {
-        font-size: 2.2rem;
-    }
-    
-    .emergency-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .emergency-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    /* FOOTER FIXES FOR MOBILE */
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-    }
-    
-    .footer-logo-image {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .footer-brand p,
-    .tribe-footer p,
-    .footer-contact-info p,
-    .footer-services a,
-    .footer-resources a {
-        text-align: center;
-    }
-    
-    /* SOCIAL ICONS - CENTERED AND IN ONE LINE ON MOBILE */
-    .social-icons {
-        justify-content: center;
-        gap: 12px;
-        overflow-x: auto;
-        padding: 5px 0;
-    }
-    
-    .social-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 1.1rem;
-    }
-    
-    .footer-services ul,
-    .footer-resources ul {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-    
-    .footer-contact-info p {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 5px;
-    }
-    
-    .footer-contact-info i {
-        margin-top: 0;
-    }
-    
-    .footer-links {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .footer-links a {
-        display: block;
-        margin: 0;
-    }
-    
-    .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 65px;
-        height: 65px;
-    }
-}
-
 /* MEDIUM PHONES (425px - 599px) */
 @media (max-width: 599px) and (min-width: 425px) {
     .container {
@@ -1575,30 +1656,6 @@ strong {
     .service-image-ar {
         min-height: 250px;
         max-height: 320px;
-    }
-    
-    /* Specific adjustments for SE.avif on medium phones */
-    .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 350px;
-        max-height: 400px;
-        padding: 10px;
-    }
-    
-    .service-section-ar:nth-child(3) .service-image-ar img {
-        max-width: 70%;
-        max-height: 70%;
-    }
-    
-    /* Specific adjustments for adhoc.png on medium phones */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 300px;
-        max-height: 360px;
-        padding: 8px;
-    }
-    
-    .service-section-ar:nth-child(5) .service-image-ar img {
-        max-width: 75%;
-        max-height: 75%;
     }
     
     .service-section-ar:nth-child(1) .service-image-ar,
@@ -1693,30 +1750,6 @@ strong {
     .service-image-ar {
         min-height: 220px;
         max-height: 280px;
-    }
-    
-    /* Specific adjustments for SE.avif on small phones */
-    .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 300px;
-        max-height: 350px;
-        padding: 8px;
-    }
-    
-    .service-section-ar:nth-child(3) .service-image-ar img {
-        max-width: 65%;
-        max-height: 65%;
-    }
-    
-    /* Specific adjustments for adhoc.png on small phones */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 260px;
-        max-height: 310px;
-        padding: 5px;
-    }
-    
-    .service-section-ar:nth-child(5) .service-image-ar img {
-        max-width: 70%;
-        max-height: 70%;
     }
     
     .service-section-ar:nth-child(1) .service-image-ar,
@@ -1821,30 +1854,6 @@ strong {
     .service-image-ar {
         min-height: 200px;
         max-height: 250px;
-    }
-    
-    /* Specific adjustments for SE.avif on very small phones */
-    .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 270px;
-        max-height: 320px;
-        padding: 5px;
-    }
-    
-    .service-section-ar:nth-child(3) .service-image-ar img {
-        max-width: 60%;
-        max-height: 60%;
-    }
-    
-    /* Specific adjustments for adhoc.png on very small phones */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 230px;
-        max-height: 280px;
-        padding: 5px;
-    }
-    
-    .service-section-ar:nth-child(5) .service-image-ar img {
-        max-width: 65%;
-        max-height: 65%;
     }
     
     .service-section-ar:nth-child(1) .service-image-ar,
