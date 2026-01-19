@@ -95,9 +95,6 @@
       }
     }
     </script>
-    <style>
-         /* No inline styles needed - fixed in main CSS */
-    </style>
 </head>
 <body>
     <!-- ===== HEADER ===== -->
@@ -154,7 +151,7 @@
         </div>
     </header>
 
-    <!-- ===== HERO SECTION WITH ARROWS ===== -->
+    <!-- ===== HERO SECTION WITH ARROWS AND DOTS ===== -->
     <section class="hero" id="home">
         <div class="hero-slider">
             <button class="hero-slider-arrow hero-prev" aria-label="Previous slide">
@@ -235,12 +232,14 @@
                 <i class="fas fa-chevron-right"></i>
             </button>
 
-            <!-- Slider Dots -->
-            <div class="slider-dots">
-                <span class="dot active" data-slide="0"></span>
-                <span class="dot" data-slide="1"></span>
-                <span class="dot" data-slide="2"></span>
-                <span class="dot" data-slide="3"></span>
+            <!-- Slider Dots Container -->
+            <div class="hero-dots-container">
+                <div class="hero-dots">
+                    <span class="hero-dot active" data-index="0" aria-label="Go to slide 1"></span>
+                    <span class="hero-dot" data-index="1" aria-label="Go to slide 2"></span>
+                    <span class="hero-dot" data-index="2" aria-label="Go to slide 3"></span>
+                    <span class="hero-dot" data-index="3" aria-label="Go to slide 4"></span>
+                </div>
             </div>
         </div>
     </section>
@@ -386,7 +385,7 @@
                     <h2 class="float-up">Mamba Security Company Profile</h2>
                     <p class="float-up">Welcome to <strong>Mamba Security</strong>, your premier provider of comprehensive security solutions. Specializing in armed response, professional guarding, installations, off-site monitoring, and advanced security technology, we are committed to safeguarding what matters most to you.</p>
                     <p class="float-up">With a focus on innovation, professionalism, and customer satisfaction, we deliver unmatched protection and peace of mind to our clients nationwide as a leading security company.</p>
-                    <a href="company-profile.pdf" class="btn btn-primary float-up" target="_blank">
+                    <a href="https://mushy-fuchsia-xkkffpafos.edgeone.app/company.profile.pdf" class="btn btn-primary float-up" target="_blank">
                         Download Our Company Profile
                     </a>
                 </div>
@@ -595,11 +594,11 @@
                 <div class="footer-resources">
                     <h4>Security Resources</h4>
                     <ul>
-                        <li><a href="/security-tips">Security Tips</a></li>
-                        <li><a href="/home-security-guide">Home Security Guide</a></li>
-                        <li><a href="/business-security">Business Security</a></li>
-                        <li><a href="/community-safety">Community Safety</a></li>
-                        <li><a href="/security-assessment">Security Assessment</a></li>
+                        <li><a href="securitytips.html">Security Tips</a></li>
+                        <li><a href="home-security-guide.html">Home Security Guide</a></li>
+                        <li><a href="business-security.html">Business Security</a></li>
+                        <li><a href="community-safety.html">Community Safety</a></li>
+                        <li><a href="security-assessment.html">Security Assessment</a></li>
                     </ul>
                 </div>
             </div>
@@ -607,10 +606,10 @@
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear"></span> Mamba Security. All rights reserved. | Security Services Provider</p>
                 <div class="footer-links">
-                    <a href="/privacy-policy">Privacy Policy</a> | 
-                    <a href="/terms">Terms of Service</a> | 
-                    <a href="/sitemap.xml">Sitemap</a> |
-                    <a href="/cookie-policy">Cookie Policy</a>
+                    <a href="privacypolicy.html">Privacy Policy</a> | 
+                    <a href="terms-of-service.html">Terms of Service</a> | 
+                    <a href="sitemap.xml">Sitemap</a> |
+                    <a href="cookie-policy.html">Cookie Policy</a>
                 </div>
             </div>
         </div>
@@ -645,6 +644,76 @@
                 </div>
                 <div class="popup-image">
                     <img src="popup.avif" alt="Join Our Security Community" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== COOKIE CONSENT POPUP ===== -->
+    <div class="cookie-consent-overlay" id="cookieConsentOverlay">
+        <div class="cookie-consent-modal" id="cookieConsentModal">
+            <div class="cookie-consent-content">
+                <div class="cookie-consent-text">
+                    <div class="cookie-icon">
+                        <i class="fas fa-cookie-bite"></i>
+                    </div>
+                    <h3>Cookie Consent</h3>
+                    <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. By clicking "Accept All", you consent to our use of cookies. You can manage your preferences by clicking "Customize Settings".</p>
+                    <p class="cookie-policy-link">For more information, see our <a href="cookie-policy.html">Cookie Policy</a>.</p>
+                </div>
+                <div class="cookie-consent-buttons">
+                    <button class="cookie-btn cookie-accept-all" id="cookieAcceptAll">Accept All</button>
+                    <button class="cookie-btn cookie-customize" id="cookieCustomize">Customize Settings</button>
+                    <button class="cookie-btn cookie-decline" id="cookieDecline">Decline</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cookie Settings Modal (Hidden by default) -->
+        <div class="cookie-settings-modal" id="cookieSettingsModal">
+            <div class="cookie-settings-content">
+                <button class="cookie-settings-close" id="cookieSettingsClose">×</button>
+                <h3>Cookie Settings</h3>
+                <p>You can set your cookie preferences below. We use cookies to provide basic site functionality and to improve your experience.</p>
+                
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <h4>Essential Cookies <span class="cookie-required">Required</span></h4>
+                        <p>These cookies are necessary for the website to function and cannot be switched off.</p>
+                    </div>
+                </div>
+                
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <h4>Analytics Cookies</h4>
+                        <p>Allow us to analyze website usage to improve our services.</p>
+                    </div>
+                    <div class="cookie-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="analyticsCookies" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Enable Analytics Cookies</span>
+                    </div>
+                </div>
+                
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <h4>Marketing Cookies</h4>
+                        <p>Used to deliver relevant advertisements and marketing communications.</p>
+                    </div>
+                    <div class="cookie-toggle">
+                        <label class="switch">
+                            <input type="checkbox" id="marketingCookies" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Enable Marketing Cookies</span>
+                    </div>
+                </div>
+                
+                <div class="cookie-settings-buttons">
+                    <button class="cookie-btn cookie-save" id="cookieSaveSettings">Save Settings</button>
+                    <button class="cookie-btn cookie-accept-all-settings">Accept All</button>
                 </div>
             </div>
         </div>
@@ -713,116 +782,83 @@
             }
         });
         
-        // ===== FIXED HERO SLIDER - WORKING ARROWS AND DOTS =====
-        const heroSlides = document.querySelectorAll('.hero-slider .slide');
-        const heroDots = document.querySelectorAll('.hero-slider .dot');
-        let heroCurrentSlide = 0;
-        let heroSlideInterval;
-        
+        // ================= HERO SLIDER WITH DOTS =================
+        const heroSlides = document.querySelectorAll('.slide');
         const heroPrevBtn = document.querySelector('.hero-prev');
         const heroNextBtn = document.querySelector('.hero-next');
+        const heroDots = document.querySelectorAll('.hero-dot');
         
-        // Pre-load hero images to prevent flash
-        const heroImages = ['hero1.jpg', 'hero2.avif', 'hero3.avif', 'hero4.avif'];
-        heroImages.forEach(imgSrc => {
-            const img = new Image();
-            img.src = imgSrc;
-        });
+        let heroCurrentSlide = 0;
+        let heroInterval = null;
+        const HERO_DELAY = 5000;
         
-        function showHeroSlide(n) {
-            // Ensure n is within bounds
-            if (n >= heroSlides.length) {
-                n = 0;
-            } else if (n < 0) {
-                n = heroSlides.length - 1;
-            }
-            
-            // Hide all slides
-            heroSlides.forEach(slide => slide.classList.remove('active'));
-            heroDots.forEach(dot => dot.classList.remove('active'));
-            
-            // Show current slide
-            heroSlides[n].classList.add('active');
-            heroDots[n].classList.add('active');
-            heroCurrentSlide = n;
-            
-            // Ensure slide background is loaded
-            const currentSlideBg = heroSlides[n].querySelector('.slide-bg');
-            if (currentSlideBg) {
-                // Force background image to load
-                const bgImage = new Image();
-                bgImage.src = currentSlideBg.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-                bgImage.onload = function() {
-                    // Ensure slide stays visible
-                    heroSlides[n].style.opacity = '1';
-                    heroSlides[n].style.zIndex = '2';
-                };
-            }
-        }
-        
-        // Dot click events - FIXED
-       let currentSlide = 0;
-const slides = document.querySelectorAll(".slide");
-const dots = document.querySelectorAll(".dot");
-
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === index);
-    });
-    dots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
-    });
-}
-
-document.querySelector(".hero-next")?.addEventListener("click", () => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-});
-
-document.querySelector(".hero-prev")?.addEventListener("click", () => {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
-});
-
-setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-}, 6000);
-
-        
-        // Arrow click events - FIXED
-        if (heroPrevBtn) {
-            heroPrevBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                clearInterval(heroSlideInterval);
-                prevHeroSlide();
-                startHeroSlider();
+        function showHeroSlide(index) {
+            // Update slides
+            heroSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                slide.style.opacity = i === index ? '1' : '0';
+                slide.style.zIndex = i === index ? '2' : '0';
+                slide.style.pointerEvents = i === index ? 'auto' : 'none';
             });
-        }
-        
-        if (heroNextBtn) {
-            heroNextBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                clearInterval(heroSlideInterval);
-                nextHeroSlide();
-                startHeroSlider();
+            
+            // Update dots
+            heroDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
             });
+            
+            heroCurrentSlide = index;
         }
         
-        // Start slider
-        showHeroSlide(0);
-        startHeroSlider();
+        function nextHeroSlide() {
+            const next = (heroCurrentSlide + 1) % heroSlides.length;
+            showHeroSlide(next);
+        }
         
-        // Pause slider on hover
-        const heroSlider = document.querySelector('.hero-slider');
-        heroSlider.addEventListener('mouseenter', () => {
-            clearInterval(heroSlideInterval);
-        });
+        function prevHeroSlide() {
+            const prev = (heroCurrentSlide - 1 + heroSlides.length) % heroSlides.length;
+            showHeroSlide(prev);
+        }
         
-        heroSlider.addEventListener('mouseleave', () => {
+        function startHeroSlider() {
+            stopHeroSlider();
+            heroInterval = setInterval(nextHeroSlide, HERO_DELAY);
+        }
+        
+        function stopHeroSlider() {
+            if (heroInterval) {
+                clearInterval(heroInterval);
+                heroInterval = null;
+            }
+        }
+        
+        // Event listeners for arrows
+        heroNextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            stopHeroSlider();
+            nextHeroSlide();
             startHeroSlider();
         });
         
+        heroPrevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            stopHeroSlider();
+            prevHeroSlide();
+            startHeroSlider();
+        });
+        
+        // Event listeners for dots
+        heroDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                stopHeroSlider();
+                showHeroSlide(i);
+                startHeroSlider();
+            });
+        });
+        
+        // Initialize
+        showHeroSlide(0);
+        startHeroSlider();
+
         // ===== POPUP - FIXED VERSION =====
         const popupClose = document.getElementById('popupClose');
         const newsletterForm = document.getElementById('newsletterForm');
@@ -919,8 +955,10 @@ setInterval(() => {
             
             // Initialize hero slider to prevent background flash
             setTimeout(() => {
-                heroSlides[0].style.opacity = '1';
-                heroSlides[0].style.zIndex = '2';
+                if (heroSlides[0]) {
+                    heroSlides[0].style.opacity = '1';
+                    heroSlides[0].style.zIndex = '2';
+                }
                 
                 // Force body background to black
                 document.body.style.backgroundColor = '#000000';
@@ -972,7 +1010,9 @@ setInterval(() => {
         function updateSlider() {
             const itemWidth = 100 / slidesToShow;
             const translateX = -currentIndex * itemWidth;
-            testimonialTrack.style.transform = `translateX(${translateX}%)`;
+            if (testimonialTrack) {
+                testimonialTrack.style.transform = `translateX(${translateX}%)`;
+            }
         }
         
         // Next slide
@@ -999,8 +1039,13 @@ setInterval(() => {
             updateSlider();
             
             // Event listeners
-            prevBtn.addEventListener('click', prevSlideTestimonial);
-            nextBtn.addEventListener('click', nextSlideTestimonial);
+            if (prevBtn) {
+                prevBtn.addEventListener('click', prevSlideTestimonial);
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', nextSlideTestimonial);
+            }
             
             // Auto slide every 5 seconds
             setInterval(nextSlideTestimonial, 5000);
@@ -1017,23 +1062,35 @@ setInterval(() => {
             initTestimonialSlider();
         }
         
-        // ===== FAQ ACCORDION =====
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                const isActive = faqItem.classList.contains('active');
-                
-                // Close all other FAQ items
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
-                    item.querySelector('.faq-toggle').textContent = '+';
+        // ===== FAQ ACCORDION - FIXED VERSION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const faqItem = question.parentElement;
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Close all other FAQ items
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                        const toggle = item.querySelector('.faq-toggle');
+                        if (toggle) toggle.textContent = '+';
+                    });
+                    
+                    // Toggle current item if it wasn't active
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                        const toggle = question.querySelector('.faq-toggle');
+                        if (toggle) toggle.textContent = '−';
+                    }
                 });
-                
-                // Toggle current item if it wasn't active
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                    question.querySelector('.faq-toggle').textContent = '−';
-                }
+            });
+            
+            // Initialize FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const toggle = item.querySelector('.faq-toggle');
+                if (toggle) toggle.textContent = '+';
             });
         });
         
@@ -1149,9 +1206,383 @@ setInterval(() => {
                 hero.style.backgroundColor = '#000000';
             }
         });
+        
+        // ===== COOKIE CONSENT FUNCTIONALITY =====
+        const cookieConsentOverlay = document.getElementById('cookieConsentOverlay');
+        const cookieSettingsModal = document.getElementById('cookieSettingsModal');
+        const cookieAcceptAll = document.getElementById('cookieAcceptAll');
+        const cookieCustomize = document.getElementById('cookieCustomize');
+        const cookieDecline = document.getElementById('cookieDecline');
+        const cookieSettingsClose = document.getElementById('cookieSettingsClose');
+        const cookieSaveSettings = document.getElementById('cookieSaveSettings');
+        const cookieAcceptAllSettings = document.querySelector('.cookie-accept-all-settings');
+        const analyticsCookies = document.getElementById('analyticsCookies');
+        const marketingCookies = document.getElementById('marketingCookies');
+
+        // Check if user has already made a cookie choice
+        function hasCookieConsent() {
+            return localStorage.getItem('cookieConsent') !== null;
+        }
+
+        // Get cookie consent status
+        function getCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            return consent ? JSON.parse(consent) : null;
+        }
+
+        // Set cookie consent
+        function setCookieConsent(consent) {
+            localStorage.setItem('cookieConsent', JSON.stringify(consent));
+            
+            // Set actual cookies based on consent
+            if (consent.essential) {
+                // Essential cookies are always set
+                document.cookie = "essential_cookies=true; path=/; max-age=31536000"; // 1 year
+            }
+            
+            if (consent.analytics) {
+                document.cookie = "analytics_cookies=true; path=/; max-age=31536000";
+                // Initialize analytics here (e.g., Google Analytics)
+                console.log("Analytics cookies enabled");
+            } else {
+                document.cookie = "analytics_cookies=false; path=/; max-age=31536000";
+            }
+            
+            if (consent.marketing) {
+                document.cookie = "marketing_cookies=true; path=/; max-age=31536000";
+                // Initialize marketing cookies here
+                console.log("Marketing cookies enabled");
+            } else {
+                document.cookie = "marketing_cookies=false; path=/; max-age=31536000";
+            }
+            
+            // Set the consent timestamp
+            document.cookie = `cookie_consent_date=${new Date().toISOString()}; path=/; max-age=31536000`;
+        }
+
+        // Show cookie consent popup
+        function showCookieConsent() {
+            // Don't show if already consented
+            if (hasCookieConsent()) {
+                return;
+            }
+            
+            // Show after a delay (after the newsletter popup)
+            setTimeout(() => {
+                cookieConsentOverlay.classList.add('active');
+                document.body.classList.add('cookie-open');
+                
+                // Hide WhatsApp button when cookie popup is open
+                const whatsappFloat = document.querySelector('.whatsapp-float');
+                if (whatsappFloat) {
+                    whatsappFloat.style.display = 'none';
+                }
+            }, 500); // Half second after newsletter popup closes
+        }
+
+        // Hide cookie consent popup
+        function hideCookieConsent() {
+            cookieConsentOverlay.classList.remove('active');
+            cookieSettingsModal.classList.remove('active');
+            document.body.classList.remove('cookie-open');
+            
+            // Show WhatsApp button again
+            const whatsappFloat = document.querySelector('.whatsapp-float');
+            if (whatsappFloat) {
+                whatsappFloat.style.display = 'flex';
+            }
+        }
+
+        // Accept all cookies
+        function acceptAllCookies() {
+            const consent = {
+                essential: true,
+                analytics: true,
+                marketing: true,
+                timestamp: new Date().toISOString()
+            };
+            
+            setCookieConsent(consent);
+            hideCookieConsent();
+            
+            // Show confirmation message
+            showCookieMessage('All cookies have been accepted. Thank you!');
+        }
+
+        // Decline all non-essential cookies
+        function declineAllCookies() {
+            const consent = {
+                essential: true, // Essential cookies are always required
+                analytics: false,
+                marketing: false,
+                timestamp: new Date().toISOString()
+            };
+            
+            setCookieConsent(consent);
+            hideCookieConsent();
+            
+            // Show confirmation message
+            showCookieMessage('Non-essential cookies have been declined. Only essential cookies are active.');
+        }
+
+        // Save customized cookie settings
+        function saveCookieSettings() {
+            const consent = {
+                essential: true, // Always true
+                analytics: analyticsCookies.checked,
+                marketing: marketingCookies.checked,
+                timestamp: new Date().toISOString()
+            };
+            
+            setCookieConsent(consent);
+            hideCookieConsent();
+            
+            // Show confirmation message
+            const message = consent.analytics && consent.marketing 
+                ? 'Your cookie preferences have been saved. All cookies are active.' 
+                : consent.analytics 
+                    ? 'Your cookie preferences have been saved. Analytics cookies are active.' 
+                    : consent.marketing 
+                        ? 'Your cookie preferences have been saved. Marketing cookies are active.' 
+                        : 'Your cookie preferences have been saved. Only essential cookies are active.';
+            
+            showCookieMessage(message);
+        }
+
+        // Show temporary confirmation message
+        function showCookieMessage(message) {
+            // Remove existing message if present
+            const existingMessage = document.querySelector('.cookie-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Create message element
+            const messageEl = document.createElement('div');
+            messageEl.className = 'cookie-message';
+            messageEl.innerHTML = `
+                <div class="cookie-message-content">
+                    <p>${message}</p>
+                    <button class="cookie-message-close">×</button>
+                </div>
+            `;
+            
+            // Add styles
+            messageEl.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--mamba-green);
+                color: var(--mamba-dark);
+                padding: 15px 25px;
+                border-radius: 50px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                z-index: 9998;
+                max-width: 90%;
+                animation: slideInUp 0.3s ease;
+            `;
+            
+            const messageContent = messageEl.querySelector('.cookie-message-content');
+            messageContent.style.cssText = `
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                font-weight: 600;
+            `;
+            
+            const closeBtn = messageEl.querySelector('.cookie-message-close');
+            closeBtn.style.cssText = `
+                background: none;
+                border: none;
+                color: var(--mamba-dark);
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 0;
+                width: 25px;
+                height: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: background 0.3s;
+            `;
+            
+            closeBtn.addEventListener('mouseover', function() {
+                this.style.background = 'rgba(0,0,0,0.1)';
+            });
+            
+            closeBtn.addEventListener('mouseout', function() {
+                this.style.background = 'none';
+            });
+            
+            closeBtn.addEventListener('click', function() {
+                messageEl.style.animation = 'slideOutDown 0.3s ease';
+                setTimeout(() => {
+                    messageEl.remove();
+                }, 300);
+            });
+            
+            // Add keyframe animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInUp {
+                    from {
+                        transform: translate(-50%, 100px);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translate(-50%, 0);
+                        opacity: 1;
+                    }
+                }
+                @keyframes slideOutDown {
+                    from {
+                        transform: translate(-50%, 0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translate(-50%, 100px);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(messageEl);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (messageEl.parentNode) {
+                    messageEl.style.animation = 'slideOutDown 0.3s ease';
+                    setTimeout(() => {
+                        if (messageEl.parentNode) {
+                            messageEl.remove();
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+
+        // Event Listeners for cookies
+        if (cookieAcceptAll) {
+            cookieAcceptAll.addEventListener('click', acceptAllCookies);
+        }
+
+        if (cookieDecline) {
+            cookieDecline.addEventListener('click', declineAllCookies);
+        }
+
+        if (cookieCustomize) {
+            cookieCustomize.addEventListener('click', () => {
+                cookieSettingsModal.classList.add('active');
+            });
+        }
+
+        if (cookieSettingsClose) {
+            cookieSettingsClose.addEventListener('click', () => {
+                cookieSettingsModal.classList.remove('active');
+            });
+        }
+
+        if (cookieSaveSettings) {
+            cookieSaveSettings.addEventListener('click', saveCookieSettings);
+        }
+
+        if (cookieAcceptAllSettings) {
+            cookieAcceptAllSettings.addEventListener('click', acceptAllCookies);
+        }
+
+        // Close cookie settings when clicking outside
+        cookieConsentOverlay.addEventListener('click', (e) => {
+            if (e.target === cookieConsentOverlay && !cookieSettingsModal.classList.contains('active')) {
+                // Don't close on outside click for main consent - require a choice
+            }
+        });
+
+        // Close with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (cookieSettingsModal.classList.contains('active')) {
+                    cookieSettingsModal.classList.remove('active');
+                }
+            }
+        });
+
+        // Initialize cookie consent on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user has already made a choice
+            if (!hasCookieConsent()) {
+                // Wait for newsletter popup to be handled, then show cookie consent
+                // We'll trigger this from the newsletter popup close event
+            }
+        });
+
+        // ===== MODIFY EXISTING NEWSLETTER POPUP TO TRIGGER COOKIE CONSENT =====
+        // Update the existing hidePopup function to trigger cookie consent
+        const originalHidePopup = hidePopup;
+
+        // Create a new hidePopup function that also shows cookie consent
+        window.hidePopup = function() {
+            originalHidePopup();
+            
+            // Show cookie consent after newsletter popup is closed
+            // But only if user hasn't already made a choice
+            if (!hasCookieConsent()) {
+                // Delay slightly to ensure smooth transition
+                setTimeout(showCookieConsent, 500);
+            }
+        };
+
+        // Also trigger cookie consent when form is submitted
+        if (newsletterForm) {
+            const originalSubmit = newsletterForm.addEventListener;
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('popupEmail').value;
+                
+                if (email && email.includes('@')) {
+                    // Show success message
+                    newsletterForm.innerHTML = `
+                        <div class="success-message">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Welcome to the Tribe!</h3>
+                            <p>Thank you for subscribing to our security newsletter.</p>
+                            <p>You'll receive your first update soon.</p>
+                        </div>
+                    `;
+                    
+                    // Hide popup after 3 seconds, then show cookie consent
+                    setTimeout(() => {
+                        hidePopup();
+                        if (!hasCookieConsent()) {
+                            setTimeout(showCookieConsent, 500);
+                        }
+                    }, 3000);
+                }
+            });
+        }
+
+        // Check on page load if we should show cookie consent immediately
+        // (if newsletter popup was already closed in a previous session)
+        window.addEventListener('load', () => {
+            // Check if newsletter preference was already set (you might want to track this)
+            const newsletterClosed = localStorage.getItem('newsletterClosed');
+            
+            if (newsletterClosed && !hasCookieConsent()) {
+                // User closed newsletter in previous session but hasn't set cookie preferences
+                // Show cookie consent after a delay
+                setTimeout(() => {
+                    if (!hasCookieConsent()) {
+                        showCookieConsent();
+                    }
+                }, 2000);
+            }
+        });
     </script>
 </body>
 </html>
+
 
 
 
