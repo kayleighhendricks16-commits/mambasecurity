@@ -394,11 +394,10 @@
         </div>
     </section>
 
-    <!-- ===== WHATSAPP SECTION (UPDATED FOR SPACE) ===== -->
+    <!-- ===== WHATSAPP SECTION ===== -->
     <section class="whatsapp-section">
         <div class="container">
             <div class="whatsapp-content">
-                <!-- FIXED: Larger image and space added -->
                 <div class="whatsapp-image image-overlay-container float-up">
                     <a href="https://wa.me/27833002975?text=Mamba%20App" class="image-overlay-link" target="_blank">
                         <div class="whatsapp-image-wrapper">
@@ -413,8 +412,7 @@
                     </div>
                     <h2 class="float-up">#JOINTHETRIBE</h2>
                     <p class="float-up">WhatsApp <strong>"Mamba App"</strong> to <a href="tel:0833002975" class="phone-number">083 300 2975</a> for instant access to our security network and emergency security alerts</p>
-                    <!-- FIXED: Added space above this button -->
-                    <a href="https://wa.me/27833002975?text=Mamba%20App" class="btn-whatsapp float-up whatsapp-button-spacing" target="_blank">
+                    <a href="https://wa.me/27833002975?text=Mamba%20App" class="btn-whatsapp float-up" target="_blank">
                         Join Our Tribe
                     </a>
                 </div>
@@ -715,7 +713,7 @@
             }
         });
         
-        // ===== HERO SLIDER WITH ARROWS =====
+        // ===== FIXED HERO SLIDER - WORKING ARROWS AND DOTS =====
         const heroSlides = document.querySelectorAll('.hero-slider .slide');
         const heroDots = document.querySelectorAll('.hero-slider .dot');
         let heroCurrentSlide = 0;
@@ -732,6 +730,13 @@
         });
         
         function showHeroSlide(n) {
+            // Ensure n is within bounds
+            if (n >= heroSlides.length) {
+                n = 0;
+            } else if (n < 0) {
+                n = heroSlides.length - 1;
+            }
+            
             // Hide all slides
             heroSlides.forEach(slide => slide.classList.remove('active'));
             heroDots.forEach(dot => dot.classList.remove('active'));
@@ -755,34 +760,40 @@
             }
         }
         
-        // Dot click events
-        heroDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                clearInterval(heroSlideInterval);
-                showHeroSlide(index);
-                startHeroSlider();
-            });
-        });
+        // Dot click events - FIXED
+       let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+    });
+    dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+    });
+}
+
+document.querySelector(".hero-next")?.addEventListener("click", () => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+});
+
+document.querySelector(".hero-prev")?.addEventListener("click", () => {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+});
+
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}, 6000);
+
         
-        function nextHeroSlide() {
-            let next = heroCurrentSlide + 1;
-            if (next >= heroSlides.length) next = 0;
-            showHeroSlide(next);
-        }
-        
-        function prevHeroSlide() {
-            let prev = heroCurrentSlide - 1;
-            if (prev < 0) prev = heroSlides.length - 1;
-            showHeroSlide(prev);
-        }
-        
-        function startHeroSlider() {
-            heroSlideInterval = setInterval(nextHeroSlide, 5000);
-        }
-        
-        // Arrow click events
+        // Arrow click events - FIXED
         if (heroPrevBtn) {
-            heroPrevBtn.addEventListener('click', () => {
+            heroPrevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
                 clearInterval(heroSlideInterval);
                 prevHeroSlide();
                 startHeroSlider();
@@ -790,7 +801,8 @@
         }
         
         if (heroNextBtn) {
-            heroNextBtn.addEventListener('click', () => {
+            heroNextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
                 clearInterval(heroSlideInterval);
                 nextHeroSlide();
                 startHeroSlider();
@@ -1140,5 +1152,6 @@
     </script>
 </body>
 </html>
+
 
 
