@@ -1865,11 +1865,12 @@ body.menu-open {
 }
 
 .cookie-consent-text p {
-    color: var(--mamba-text);
+    color: #000000; /* Black text */
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 10px;
 }
+
 
 .cookie-policy-link {
     margin-top: 10px;
@@ -3224,5 +3225,6 @@ img {
         transform: scale(1.15) !important;
     }
 }
+
 
 
