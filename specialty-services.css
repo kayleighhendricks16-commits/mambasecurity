@@ -1003,34 +1003,14 @@ strong {
     text-shadow: 0 0 30px rgba(153, 255, 0, 0.7);
 }
 
-/* ===== EMERGENCY BUTTONS ICON SPACING ===== */
-.emergency-buttons .btn {
-    display: inline-flex;
-    align-items: center;
+ .emergency-buttons {
+    display: flex;
+    gap: 20px;
     justify-content: center;
-    gap: 15px;
-    padding: clamp(12px, 3vw, 14px) clamp(25px, 4vw, 40px);
+    margin-top: 30px;
+    flex-wrap: wrap;
 }
 
-.emergency-buttons .btn i {
-    font-size: 1.2em;
-    flex-shrink: 0;
-}
-
-/* For mobile, adjust spacing */
-@media (max-width: 767px) {
-    .emergency-buttons .btn {
-        gap: 12px;
-        padding: 14px 25px;
-    }
-}
-
-@media (max-width: 424px) {
-    .emergency-buttons .btn {
-        gap: 10px;
-        padding: 12px 20px;
-    }
-}
 
 /* ===== FLOAT UP ANIMATION ===== */
 .float-on-scroll {
@@ -1755,15 +1735,34 @@ strong {
         font-size: 2.2rem;
     }
     
-    .emergency-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
+    /* ===== EMERGENCY BUTTONS ICON SPACING ===== */
+.emergency-buttons .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: clamp(12px, 3vw, 14px) clamp(25px, 4vw, 40px);
+}
+
+.emergency-buttons .btn i {
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+/* For mobile, adjust spacing */
+@media (max-width: 767px) {
     .emergency-buttons .btn {
-        width: 100%;
-        max-width: 300px;
+        gap: 12px;
+        padding: 14px 25px;
     }
+}
+
+@media (max-width: 424px) {
+    .emergency-buttons .btn {
+        gap: 10px;
+        padding: 12px 20px;
+    }
+}
     
     /* FOOTER FIXES FOR MOBILE */
     .footer-content {
@@ -2428,3 +2427,4 @@ img {
         padding-bottom: max(30px, env(safe-area-inset-bottom));
     }
 }
+
