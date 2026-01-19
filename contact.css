@@ -838,7 +838,77 @@ strong {
     font-size: 0.95rem;
 }
 
+
 /* ===== CONTACT CTA ===== */
+/* ===== CONTACT CTA BUTTONS FIX ===== */
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: clamp(14px, 3vw, 16px) clamp(25px, 4vw, 35px);
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    min-width: 180px;
+    flex: 1;
+    max-width: 220px;
+}
+
+.cta-buttons .btn i {
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+/* Make sure contact-cta section has proper spacing */
+.contact-cta > .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Add responsive adjustments for mobile */
+@media (max-width: 767px) {
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+        min-width: auto;
+    }
+    
+    .contact-cta h2 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-cta p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 424px) {
+    .cta-buttons {
+        gap: 15px;
+    }
+    
+    .cta-buttons .btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}
 .contact-cta {
     background: linear-gradient(135deg, var(--mamba-gray) 0%, var(--mamba-dark) 100%);
     padding: clamp(60px, 10vw, 80px) 0;
@@ -851,41 +921,15 @@ strong {
     font-size: clamp(1.8rem, 4vw, 2.5rem);
 }
 
+.contact-cta h2 span {
+    color: var(--mamba-green);
+}
+
 .contact-cta p {
     font-size: clamp(1rem, 2.5vw, 1.3rem);
     color: var(--mamba-text);
     margin: 0 auto 30px;
     max-width: 700px;
-}
-
-
-/* ===== BUTTONS ICON SPACING ===== */
-.cta-buttons .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    padding: clamp(12px, 3vw, 14px) clamp(25px, 4vw, 40px);
-}
-
-.cta-buttons .btn i {
-    font-size: 1.2em;
-    flex-shrink: 0;
-}
-
-/* For mobile, adjust spacing */
-@media (max-width: 767px) {
-    .cta-buttons .btn {
-        gap: 12px;
-        padding: 14px 25px;
-    }
-}
-
-@media (max-width: 424px) {
-    .cta-buttons .btn {
-        gap: 10px;
-        padding: 12px 20px;
-    }
 }
 
 /* ===== FLOAT UP ANIMATION ===== */
