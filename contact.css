@@ -858,11 +858,34 @@ strong {
     max-width: 700px;
 }
 
-.cta-buttons {
-    display: flex;
-    gap: 20px;
+
+/* ===== BUTTONS ICON SPACING ===== */
+.cta-buttons .btn {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
+    gap: 15px;
+    padding: clamp(12px, 3vw, 14px) clamp(25px, 4vw, 40px);
+}
+
+.cta-buttons .btn i {
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+/* For mobile, adjust spacing */
+@media (max-width: 767px) {
+    .cta-buttons .btn {
+        gap: 12px;
+        padding: 14px 25px;
+    }
+}
+
+@media (max-width: 424px) {
+    .cta-buttons .btn {
+        gap: 10px;
+        padding: 12px 20px;
+    }
 }
 
 /* ===== FLOAT UP ANIMATION ===== */
