@@ -770,7 +770,7 @@ body.menu-open {
 /* ===== UPDATED HERO SLIDER WITH DOTS ===== */
 .hero {
     position: relative;
-    min-height: 80vh;
+    min-height: 70vh;
     overflow: hidden;
     margin-top: 0;
 }
@@ -951,14 +951,14 @@ body.menu-open {
 }
 
 .hero-dot {
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
     display: block;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
 }
 
 .hero-dot:hover {
@@ -1859,18 +1859,17 @@ body.menu-open {
 }
 
 .cookie-consent-text h3 {
-    color: var(--mamba-green);
+    color: var(#000000);
     font-size: 1.8rem;
     margin-bottom: 15px;
 }
 
 .cookie-consent-text p {
-    color: #FFFFFF; /* Black text */
+    color: var(--mamba-text);
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 10px;
 }
-
 
 .cookie-policy-link {
     margin-top: 10px;
@@ -3225,6 +3224,7 @@ img {
         transform: scale(1.15) !important;
     }
 }
+
 
 
 
