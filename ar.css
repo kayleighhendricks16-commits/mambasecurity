@@ -610,7 +610,7 @@ strong {
 
 /* K9 Image */
 .service-section-ar:nth-child(4) .service-image-ar {
-    padding: clamp(15px, 4vw, 35px);
+    padding: clamp(20px, 4vw, 40px);
 }
 
 /* WhatsApp Groups Image */
@@ -1974,4 +1974,55 @@ img {
         padding-bottom: max(30px, env(safe-area-inset-bottom));
     }
 }
+/* ===== K9 IMAGE MOBILE FIX ===== */
+/* Adjust the K9 image specifically for mobile devices */
+@media (max-width: 1024px) {
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 350px;
+        max-height: 450px;
+        padding: 20px;
+        background-color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .service-section-ar:nth-child(4) .service-image-ar img {
+        object-fit: contain;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        background: #000;
+    }
+}
+
+/* For smaller mobile screens */
+@media (max-width: 767px) {
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 300px;
+        max-height: 400px;
+        padding: 15px;
+    }
+    
+    /* Make K9 image fill container better on mobile */
+    .service-section-ar:nth-child(4) .service-image-ar img {
+        object-fit: contain;
+        object-position: center center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* For very small phones */
+@media (max-width: 424px) {
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 250px;
+        max-height: 350px;
+        padding: 10px;
+    }
+}
+
+
+
 
