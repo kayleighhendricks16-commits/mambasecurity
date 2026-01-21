@@ -2,8 +2,14 @@
 <html lang="en-ZA">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mamba Security</title>
+    
+    <!-- SAMSUNG FIX: Prevent any scaling issues -->
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
     <meta name="description" content="Mamba Security provides premier armed response, professional security guarding, CCTV installations, and advanced security technology solutions.">
     <meta name="keywords" content="security, armed response, security services Johannesburg, emergency response, security guards, CCTV installation, alarm systems, home security, business security">
     
@@ -151,7 +157,7 @@
         </div>
     </header>
 
-    <!-- ===== HERO SECTION WITH ARROWS AND DOTS ===== -->
+    <!-- ===== HERO SECTION ===== -->
     <section class="hero" id="home">
         <div class="hero-slider">
             <button class="hero-slider-arrow hero-prev" aria-label="Previous slide">
@@ -244,7 +250,7 @@
         </div>
     </section>
 
-    <!-- ===== SECURITY CONTENT SECTION WITH IMAGE ===== -->
+    <!-- ===== SECURITY CONTENT SECTION ===== -->
     <section class="security-content-section">
         <div class="container">
             <div class="security-content-wrapper">
@@ -385,7 +391,7 @@
                     <h2 class="float-up">Mamba Security Company Profile</h2>
                     <p class="float-up">Welcome to <strong>Mamba Security</strong>, your premier provider of comprehensive security solutions. Specializing in armed response, professional guarding, installations, off-site monitoring, and advanced security technology, we are committed to safeguarding what matters most to you.</p>
                     <p class="float-up">With a focus on innovation, professionalism, and customer satisfaction, we deliver unmatched protection and peace of mind to our clients nationwide as a leading security company.</p>
-                    <a href="company.profile.pdf" class="btn btn-primary float-up" target="_blank">
+                    <a href="https://mushy-fuchsia-xkkffpafos.edgeone.app/company.profile.pdf" class="btn btn-primary float-up" target="_blank">
                         Download Our Company Profile
                     </a>
                 </div>
@@ -419,7 +425,7 @@
         </div>
     </section>
 
-    <!-- ===== TESTIMONIALS SECTION WITH SLIDER ===== -->
+    <!-- ===== TESTIMONIALS SECTION ===== -->
     <section class="testimonials-section">
         <div class="container">
             <div class="section-header">
@@ -552,7 +558,6 @@
                             <a href="https://www.facebook.com/mambastrike.force" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                             <a href="https://www.instagram.com/mamba_security/" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                             <a href="https://www.tiktok.com/@mambastrikeforce" class="social-icon tiktok" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                            <!-- FIXED: Twitter/X logo now uses x.png image -->
                             <a href="https://x.com/Mamba_Group" class="social-icon x-logo" aria-label="Twitter/X">
                                 <img src="x.png" alt="Twitter/X" class="x-logo-img">
                             </a>
@@ -584,7 +589,7 @@
                 <div class="footer-contact">
                     <h4>Contact Our Security Team</h4>
                     <div class="footer-contact-info">
-                   <p><i class="fas fa-phone"></i> Contact: <a href="tel:0116090237" class="footer-phone">011 609 0237</a></p>
+                        <p><i class="fas fa-phone"></i> Contact: <a href="tel:0116090237" class="footer-phone">011 609 0237</a></p>
                         <p><i class="fas fa-envelope"></i> mamba@mambagroup.co.za</p>
                         <p><i class="fas fa-map-marker-alt"></i> 12 President Road, Eastleigh</p>
                         <p><i class="fas fa-clock"></i> Rapid Emergency Response</p>
@@ -669,7 +674,7 @@
             </div>
         </div>
         
-        <!-- Cookie Settings Modal (Hidden by default) -->
+        <!-- Cookie Settings Modal -->
         <div class="cookie-settings-modal" id="cookieSettingsModal">
             <div class="cookie-settings-content">
                 <button class="cookie-settings-close" id="cookieSettingsClose">×</button>
@@ -730,856 +735,50 @@
         </div>
     </a>
 
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    <!-- ===== INLINE STYLES (For Samsung Fixes) ===== -->
+    <style>
+        /* SAMSUNG NUCLEAR FIX - Force menu closed initially */
+        #mobileMenu {
+            transform: translateX(100%) !important;
+            -webkit-transform: translateX(100%) !important;
+            transition: transform 0.3s ease !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            right: 0 !important;
+            left: auto !important;
+        }
         
-        // ===== MOBILE MENU =====
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const body = document.body;
-        const popupOverlay = document.getElementById('popupOverlay');
-        const whatsappFloat = document.querySelector('.whatsapp-float');
+        #mobileMenu.active {
+            transform: translateX(0) !important;
+            -webkit-transform: translateX(0) !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Force body to not scroll when menu is open */
+        body.menu-open {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+        }
+        
+        /* Samsung specific tap highlight fix */
+        * {
+            -webkit-tap-highlight-color: transparent !important;
+            tap-highlight-color: transparent !important;
+        }
+        
+        /* Ensure WhatsApp button is visible */
+        .whatsapp-float {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 9999 !important;
+        }
+    </style>
 
-        hamburger.addEventListener('click', () => {
-            // Don't toggle menu if popup is open
-            if (popupOverlay.classList.contains('active')) {
-                return;
-            }
-            
-            mobileMenu.classList.toggle('active');
-            body.classList.toggle('menu-open');
-            hamburger.classList.toggle('active');
-            
-            // Hide/show WhatsApp button
-            if (mobileMenu.classList.contains('active')) {
-                whatsappFloat.style.display = 'none';
-            } else {
-                whatsappFloat.style.display = 'flex';
-            }
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-                hamburger.classList.remove('active');
-                whatsappFloat.style.display = 'flex';
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && 
-                !hamburger.contains(e.target) && 
-                mobileMenu.classList.contains('active') &&
-                !popupOverlay.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-                hamburger.classList.remove('active');
-                whatsappFloat.style.display = 'flex';
-            }
-        });
-        
-        // ================= HERO SLIDER WITH DOTS =================
-        const heroSlides = document.querySelectorAll('.slide');
-        const heroPrevBtn = document.querySelector('.hero-prev');
-        const heroNextBtn = document.querySelector('.hero-next');
-        const heroDots = document.querySelectorAll('.hero-dot');
-        
-        let heroCurrentSlide = 0;
-        let heroInterval = null;
-        const HERO_DELAY = 5000;
-        
-        function showHeroSlide(index) {
-            // Update slides
-            heroSlides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-                slide.style.opacity = i === index ? '1' : '0';
-                slide.style.zIndex = i === index ? '2' : '0';
-                slide.style.pointerEvents = i === index ? 'auto' : 'none';
-            });
-            
-            // Update dots
-            heroDots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-            
-            heroCurrentSlide = index;
-        }
-        
-        function nextHeroSlide() {
-            const next = (heroCurrentSlide + 1) % heroSlides.length;
-            showHeroSlide(next);
-        }
-        
-        function prevHeroSlide() {
-            const prev = (heroCurrentSlide - 1 + heroSlides.length) % heroSlides.length;
-            showHeroSlide(prev);
-        }
-        
-        function startHeroSlider() {
-            stopHeroSlider();
-            heroInterval = setInterval(nextHeroSlide, HERO_DELAY);
-        }
-        
-        function stopHeroSlider() {
-            if (heroInterval) {
-                clearInterval(heroInterval);
-                heroInterval = null;
-            }
-        }
-        
-        // Event listeners for arrows
-        heroNextBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            stopHeroSlider();
-            nextHeroSlide();
-            startHeroSlider();
-        });
-        
-        heroPrevBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            stopHeroSlider();
-            prevHeroSlide();
-            startHeroSlider();
-        });
-        
-        // Event listeners for dots
-        heroDots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                stopHeroSlider();
-                showHeroSlide(i);
-                startHeroSlider();
-            });
-        });
-        
-        // Initialize
-        showHeroSlide(0);
-        startHeroSlider();
-
-        // ===== POPUP - FIXED VERSION =====
-        const popupClose = document.getElementById('popupClose');
-        const newsletterForm = document.getElementById('newsletterForm');
-        
-        // Function to show popup
-        function showPopup() {
-            // Show popup after 3 seconds
-            setTimeout(() => {
-                // Close mobile menu if it's open
-                if (mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    body.classList.remove('menu-open');
-                    hamburger.classList.remove('active');
-                }
-                
-                popupOverlay.classList.add('active');
-                body.classList.add('popup-open');
-                
-                // Hide WhatsApp button when popup is open
-                whatsappFloat.style.display = 'none';
-                
-                // Disable hamburger clicks while popup is open
-                hamburger.style.pointerEvents = 'none';
-                
-                // Close button focus
-                setTimeout(() => {
-                    const closeBtn = document.getElementById('popupClose');
-                    if (closeBtn) closeBtn.focus();
-                }, 100);
-            }, 3000);
-        }
-        
-        // Function to hide popup
-        function hidePopup() {
-            popupOverlay.classList.remove('active');
-            body.classList.remove('popup-open');
-            
-            // Show WhatsApp button again
-            whatsappFloat.style.display = 'flex';
-            
-            // Re-enable hamburger clicks
-            hamburger.style.pointerEvents = 'auto';
-            
-            // Make sure mobile menu stays closed
-            mobileMenu.classList.remove('active');
-            body.classList.remove('menu-open');
-            hamburger.classList.remove('active');
-            
-            // On mobile, ensure hamburger is visible after popup closes
-            if (window.innerWidth <= 992) {
-                hamburger.style.display = 'flex';
-            }
-        }
-        
-        // Event listeners for popup
-        if (popupClose) {
-            popupClose.addEventListener('click', hidePopup);
-        }
-        
-        if (popupOverlay) {
-            popupOverlay.addEventListener('click', (e) => {
-                if (e.target === popupOverlay) {
-                    hidePopup();
-                }
-            });
-        }
-        
-        // Handle form submission
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = document.getElementById('popupEmail').value;
-                
-                if (email && email.includes('@')) {
-                    // Show success message
-                    newsletterForm.innerHTML = `
-                        <div class="success-message">
-                            <i class="fas fa-check-circle"></i>
-                            <h3>Welcome to the Tribe!</h3>
-                            <p>Thank you for subscribing to our security newsletter.</p>
-                            <p>You'll receive your first update soon.</p>
-                        </div>
-                    `;
-                    
-                    // Hide popup after 3 seconds
-                    setTimeout(hidePopup, 3000);
-                }
-            });
-        }
-        
-        // Show popup when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(showPopup, 3000);
-            
-            // Initialize hero slider to prevent background flash
-            setTimeout(() => {
-                if (heroSlides[0]) {
-                    heroSlides[0].style.opacity = '1';
-                    heroSlides[0].style.zIndex = '2';
-                }
-                
-                // Force body background to black
-                document.body.style.backgroundColor = '#000000';
-                
-                // Ensure hero section has black background
-                const hero = document.querySelector('.hero');
-                if (hero) {
-                    hero.style.backgroundColor = '#000000';
-                }
-            }, 100);
-        });
-        
-        // ===== HEADER SCROLL EFFECT =====
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // ===== TESTIMONIALS SLIDER =====
-        const testimonialTrack = document.querySelector('.testimonials-track');
-        const testimonialItems = document.querySelectorAll('.testimonial-item');
-        const prevBtn = document.querySelector('.slider-prev');
-        const nextBtn = document.querySelector('.slider-next');
-        
-        let currentIndex = 0;
-        let slidesToShow = 3; // Default for desktop
-        let totalSlides = testimonialItems.length;
-        
-        // Update slides to show based on screen size
-        function updateSlidesToShow() {
-            if (window.innerWidth <= 992) {
-                slidesToShow = 2; // Tablet
-            } else {
-                slidesToShow = 3; // Desktop
-            }
-            
-            if (window.innerWidth <= 768) {
-                slidesToShow = 1; // Mobile
-            }
-            
-            updateSlider();
-        }
-        
-        // Update slider position
-        function updateSlider() {
-            const itemWidth = 100 / slidesToShow;
-            const translateX = -currentIndex * itemWidth;
-            if (testimonialTrack) {
-                testimonialTrack.style.transform = `translateX(${translateX}%)`;
-            }
-        }
-        
-        // Next slide
-        function nextSlideTestimonial() {
-            currentIndex += slidesToShow;
-            if (currentIndex >= totalSlides) {
-                currentIndex = 0;
-            }
-            updateSlider();
-        }
-        
-        // Previous slide
-        function prevSlideTestimonial() {
-            currentIndex -= slidesToShow;
-            if (currentIndex < 0) {
-                currentIndex = Math.floor((totalSlides - 1) / slidesToShow) * slidesToShow;
-            }
-            updateSlider();
-        }
-        
-        // Initialize slider
-        function initTestimonialSlider() {
-            updateSlidesToShow();
-            updateSlider();
-            
-            // Event listeners
-            if (prevBtn) {
-                prevBtn.addEventListener('click', prevSlideTestimonial);
-            }
-            
-            if (nextBtn) {
-                nextBtn.addEventListener('click', nextSlideTestimonial);
-            }
-            
-            // Auto slide every 5 seconds
-            setInterval(nextSlideTestimonial, 5000);
-            
-            // Update on resize
-            window.addEventListener('resize', () => {
-                updateSlidesToShow();
-                updateSlider();
-            });
-        }
-        
-        // Start testimonial slider
-        if (testimonialTrack && testimonialItems.length > 0) {
-            initTestimonialSlider();
-        }
-        
-        // ===== FAQ ACCORDION - FIXED VERSION =====
-        document.addEventListener('DOMContentLoaded', function() {
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', () => {
-                    const faqItem = question.parentElement;
-                    const isActive = faqItem.classList.contains('active');
-                    
-                    // Close all other FAQ items
-                    document.querySelectorAll('.faq-item').forEach(item => {
-                        item.classList.remove('active');
-                        const toggle = item.querySelector('.faq-toggle');
-                        if (toggle) toggle.textContent = '+';
-                    });
-                    
-                    // Toggle current item if it wasn't active
-                    if (!isActive) {
-                        faqItem.classList.add('active');
-                        const toggle = question.querySelector('.faq-toggle');
-                        if (toggle) toggle.textContent = '−';
-                    }
-                });
-            });
-            
-            // Initialize FAQ items
-            document.querySelectorAll('.faq-item').forEach(item => {
-                const toggle = item.querySelector('.faq-toggle');
-                if (toggle) toggle.textContent = '+';
-            });
-        });
-        
-        // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // ===== FLOAT UP ANIMATION ON SCROLL =====
-        function initFloatUpAnimation() {
-            const floatElements = document.querySelectorAll('.float-up');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            floatElements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(element);
-            });
-        }
-        
-        // Initialize float-up animation
-        document.addEventListener('DOMContentLoaded', () => {
-            initFloatUpAnimation();
-        });
-        
-        // ===== CLOSE MOBILE MENU ON ESCAPE =====
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (popupOverlay.classList.contains('active')) {
-                    hidePopup();
-                } else if (mobileMenu.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    body.classList.remove('menu-open');
-                    hamburger.classList.remove('active');
-                    whatsappFloat.style.display = 'flex';
-                }
-            }
-        });
-        
-        // ===== FORCE PROPER MOBILE LAYOUT ON LOAD =====
-        function checkMobilePopup() {
-            if (window.innerWidth <= 768) {
-                // Force mobile layout for popup
-                const popupContent = document.querySelector('.popup-content');
-                if (popupContent) {
-                    popupContent.style.flexDirection = 'column';
-                }
-                
-                // Hide image on mobile
-                const popupImage = document.querySelector('.popup-image');
-                if (popupImage) {
-                    popupImage.style.display = 'none';
-                }
-            }
-        }
-        
-        // Check on load and resize
-        window.addEventListener('load', checkMobilePopup);
-        window.addEventListener('resize', checkMobilePopup);
-        
-        // ===== FIX WHATSAPP BUTTON Z-INDEX =====
-        // Ensure WhatsApp button is visible by default
-        window.addEventListener('load', () => {
-            whatsappFloat.style.display = 'flex';
-            whatsappFloat.style.opacity = '1';
-            whatsappFloat.style.visibility = 'visible';
-            
-            // Final check to ensure hero slider is properly displayed
-            setTimeout(() => {
-                const activeSlide = document.querySelector('.slide.active');
-                if (activeSlide) {
-                    activeSlide.style.opacity = '1';
-                    activeSlide.style.zIndex = '2';
-                }
-                
-                // Ensure body has black background
-                document.body.style.backgroundColor = '#000000';
-            }, 500);
-        });
-        
-        // ===== FIX FOR INITIAL HERO LOAD =====
-        // Ensure hero background is black before images load
-        window.addEventListener('beforeunload', () => {
-            // Set hero background to black when leaving page
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.backgroundColor = '#000000';
-            }
-        });
-        
-        // ===== COOKIE CONSENT FUNCTIONALITY =====
-        const cookieConsentOverlay = document.getElementById('cookieConsentOverlay');
-        const cookieSettingsModal = document.getElementById('cookieSettingsModal');
-        const cookieAcceptAll = document.getElementById('cookieAcceptAll');
-        const cookieCustomize = document.getElementById('cookieCustomize');
-        const cookieDecline = document.getElementById('cookieDecline');
-        const cookieSettingsClose = document.getElementById('cookieSettingsClose');
-        const cookieSaveSettings = document.getElementById('cookieSaveSettings');
-        const cookieAcceptAllSettings = document.querySelector('.cookie-accept-all-settings');
-        const analyticsCookies = document.getElementById('analyticsCookies');
-        const marketingCookies = document.getElementById('marketingCookies');
-
-        // Check if user has already made a cookie choice
-        function hasCookieConsent() {
-            return localStorage.getItem('cookieConsent') !== null;
-        }
-
-        // Get cookie consent status
-        function getCookieConsent() {
-            const consent = localStorage.getItem('cookieConsent');
-            return consent ? JSON.parse(consent) : null;
-        }
-
-        // Set cookie consent
-        function setCookieConsent(consent) {
-            localStorage.setItem('cookieConsent', JSON.stringify(consent));
-            
-            // Set actual cookies based on consent
-            if (consent.essential) {
-                // Essential cookies are always set
-                document.cookie = "essential_cookies=true; path=/; max-age=31536000"; // 1 year
-            }
-            
-            if (consent.analytics) {
-                document.cookie = "analytics_cookies=true; path=/; max-age=31536000";
-                // Initialize analytics here (e.g., Google Analytics)
-                console.log("Analytics cookies enabled");
-            } else {
-                document.cookie = "analytics_cookies=false; path=/; max-age=31536000";
-            }
-            
-            if (consent.marketing) {
-                document.cookie = "marketing_cookies=true; path=/; max-age=31536000";
-                // Initialize marketing cookies here
-                console.log("Marketing cookies enabled");
-            } else {
-                document.cookie = "marketing_cookies=false; path=/; max-age=31536000";
-            }
-            
-            // Set the consent timestamp
-            document.cookie = `cookie_consent_date=${new Date().toISOString()}; path=/; max-age=31536000`;
-        }
-
-        // Show cookie consent popup
-        function showCookieConsent() {
-            // Don't show if already consented
-            if (hasCookieConsent()) {
-                return;
-            }
-            
-            // Show after a delay (after the newsletter popup)
-            setTimeout(() => {
-                cookieConsentOverlay.classList.add('active');
-                document.body.classList.add('cookie-open');
-                
-                // Hide WhatsApp button when cookie popup is open
-                const whatsappFloat = document.querySelector('.whatsapp-float');
-                if (whatsappFloat) {
-                    whatsappFloat.style.display = 'none';
-                }
-            }, 500); // Half second after newsletter popup closes
-        }
-
-        // Hide cookie consent popup
-        function hideCookieConsent() {
-            cookieConsentOverlay.classList.remove('active');
-            cookieSettingsModal.classList.remove('active');
-            document.body.classList.remove('cookie-open');
-            
-            // Show WhatsApp button again
-            const whatsappFloat = document.querySelector('.whatsapp-float');
-            if (whatsappFloat) {
-                whatsappFloat.style.display = 'flex';
-            }
-        }
-
-        // Accept all cookies
-        function acceptAllCookies() {
-            const consent = {
-                essential: true,
-                analytics: true,
-                marketing: true,
-                timestamp: new Date().toISOString()
-            };
-            
-            setCookieConsent(consent);
-            hideCookieConsent();
-            
-            // Show confirmation message
-            showCookieMessage('All cookies have been accepted. Thank you!');
-        }
-
-        // Decline all non-essential cookies
-        function declineAllCookies() {
-            const consent = {
-                essential: true, // Essential cookies are always required
-                analytics: false,
-                marketing: false,
-                timestamp: new Date().toISOString()
-            };
-            
-            setCookieConsent(consent);
-            hideCookieConsent();
-            
-            // Show confirmation message
-            showCookieMessage('Non-essential cookies have been declined. Only essential cookies are active.');
-        }
-
-        // Save customized cookie settings
-        function saveCookieSettings() {
-            const consent = {
-                essential: true, // Always true
-                analytics: analyticsCookies.checked,
-                marketing: marketingCookies.checked,
-                timestamp: new Date().toISOString()
-            };
-            
-            setCookieConsent(consent);
-            hideCookieConsent();
-            
-            // Show confirmation message
-            const message = consent.analytics && consent.marketing 
-                ? 'Your cookie preferences have been saved. All cookies are active.' 
-                : consent.analytics 
-                    ? 'Your cookie preferences have been saved. Analytics cookies are active.' 
-                    : consent.marketing 
-                        ? 'Your cookie preferences have been saved. Marketing cookies are active.' 
-                        : 'Your cookie preferences have been saved. Only essential cookies are active.';
-            
-            showCookieMessage(message);
-        }
-
-        // Show temporary confirmation message
-        function showCookieMessage(message) {
-            // Remove existing message if present
-            const existingMessage = document.querySelector('.cookie-message');
-            if (existingMessage) {
-                existingMessage.remove();
-            }
-            
-            // Create message element
-            const messageEl = document.createElement('div');
-            messageEl.className = 'cookie-message';
-            messageEl.innerHTML = `
-                <div class="cookie-message-content">
-                    <p>${message}</p>
-                    <button class="cookie-message-close">×</button>
-                </div>
-            `;
-            
-            // Add styles
-            messageEl.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: var(--mamba-green);
-                color: var(--mamba-dark);
-                padding: 15px 25px;
-                border-radius: 50px;
-                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-                z-index: 9998;
-                max-width: 90%;
-                animation: slideInUp 0.3s ease;
-            `;
-            
-            const messageContent = messageEl.querySelector('.cookie-message-content');
-            messageContent.style.cssText = `
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                font-weight: 600;
-            `;
-            
-            const closeBtn = messageEl.querySelector('.cookie-message-close');
-            closeBtn.style.cssText = `
-                background: none;
-                border: none;
-                color: var(--mamba-dark);
-                font-size: 1.5rem;
-                cursor: pointer;
-                padding: 0;
-                width: 25px;
-                height: 25px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                transition: background 0.3s;
-            `;
-            
-            closeBtn.addEventListener('mouseover', function() {
-                this.style.background = 'rgba(0,0,0,0.1)';
-            });
-            
-            closeBtn.addEventListener('mouseout', function() {
-                this.style.background = 'none';
-            });
-            
-            closeBtn.addEventListener('click', function() {
-                messageEl.style.animation = 'slideOutDown 0.3s ease';
-                setTimeout(() => {
-                    messageEl.remove();
-                }, 300);
-            });
-            
-            // Add keyframe animations
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideInUp {
-                    from {
-                        transform: translate(-50%, 100px);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translate(-50%, 0);
-                        opacity: 1;
-                    }
-                }
-                @keyframes slideOutDown {
-                    from {
-                        transform: translate(-50%, 0);
-                        opacity: 1;
-                    }
-                    to {
-                        transform: translate(-50%, 100px);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            document.body.appendChild(messageEl);
-            
-            // Auto-remove after 5 seconds
-            setTimeout(() => {
-                if (messageEl.parentNode) {
-                    messageEl.style.animation = 'slideOutDown 0.3s ease';
-                    setTimeout(() => {
-                        if (messageEl.parentNode) {
-                            messageEl.remove();
-                        }
-                    }, 300);
-                }
-            }, 5000);
-        }
-
-        // Event Listeners for cookies
-        if (cookieAcceptAll) {
-            cookieAcceptAll.addEventListener('click', acceptAllCookies);
-        }
-
-        if (cookieDecline) {
-            cookieDecline.addEventListener('click', declineAllCookies);
-        }
-
-        if (cookieCustomize) {
-            cookieCustomize.addEventListener('click', () => {
-                cookieSettingsModal.classList.add('active');
-            });
-        }
-
-        if (cookieSettingsClose) {
-            cookieSettingsClose.addEventListener('click', () => {
-                cookieSettingsModal.classList.remove('active');
-            });
-        }
-
-        if (cookieSaveSettings) {
-            cookieSaveSettings.addEventListener('click', saveCookieSettings);
-        }
-
-        if (cookieAcceptAllSettings) {
-            cookieAcceptAllSettings.addEventListener('click', acceptAllCookies);
-        }
-
-        // Close cookie settings when clicking outside
-        cookieConsentOverlay.addEventListener('click', (e) => {
-            if (e.target === cookieConsentOverlay && !cookieSettingsModal.classList.contains('active')) {
-                // Don't close on outside click for main consent - require a choice
-            }
-        });
-
-        // Close with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (cookieSettingsModal.classList.contains('active')) {
-                    cookieSettingsModal.classList.remove('active');
-                }
-            }
-        });
-
-        // Initialize cookie consent on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if user has already made a choice
-            if (!hasCookieConsent()) {
-                // Wait for newsletter popup to be handled, then show cookie consent
-                // We'll trigger this from the newsletter popup close event
-            }
-        });
-
-        // ===== MODIFY EXISTING NEWSLETTER POPUP TO TRIGGER COOKIE CONSENT =====
-        // Update the existing hidePopup function to trigger cookie consent
-        const originalHidePopup = hidePopup;
-
-        // Create a new hidePopup function that also shows cookie consent
-        window.hidePopup = function() {
-            originalHidePopup();
-            
-            // Show cookie consent after newsletter popup is closed
-            // But only if user hasn't already made a choice
-            if (!hasCookieConsent()) {
-                // Delay slightly to ensure smooth transition
-                setTimeout(showCookieConsent, 500);
-            }
-        };
-
-        // Also trigger cookie consent when form is submitted
-        if (newsletterForm) {
-            const originalSubmit = newsletterForm.addEventListener;
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = document.getElementById('popupEmail').value;
-                
-                if (email && email.includes('@')) {
-                    // Show success message
-                    newsletterForm.innerHTML = `
-                        <div class="success-message">
-                            <i class="fas fa-check-circle"></i>
-                            <h3>Welcome to the Tribe!</h3>
-                            <p>Thank you for subscribing to our security newsletter.</p>
-                            <p>You'll receive your first update soon.</p>
-                        </div>
-                    `;
-                    
-                    // Hide popup after 3 seconds, then show cookie consent
-                    setTimeout(() => {
-                        hidePopup();
-                        if (!hasCookieConsent()) {
-                            setTimeout(showCookieConsent, 500);
-                        }
-                    }, 3000);
-                }
-            });
-        }
-
-        // Check on page load if we should show cookie consent immediately
-        // (if newsletter popup was already closed in a previous session)
-        window.addEventListener('load', () => {
-            // Check if newsletter preference was already set (you might want to track this)
-            const newsletterClosed = localStorage.getItem('newsletterClosed');
-            
-            if (newsletterClosed && !hasCookieConsent()) {
-                // User closed newsletter in previous session but hasn't set cookie preferences
-                // Show cookie consent after a delay
-                setTimeout(() => {
-                    if (!hasCookieConsent()) {
-                        showCookieConsent();
-                    }
-                }, 2000);
-            }
-        });
-    </script>
+    <!-- JavaScript -->
+    <script src="index.js"></script>
 </body>
 </html>
 
