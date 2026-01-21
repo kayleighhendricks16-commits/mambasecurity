@@ -228,23 +228,24 @@ strong {
     border-radius: 2px;
 }
 
-/* Mobile Menu */
+/* ===== MOBILE MENU - FIXED FOR SAMSUNG/ANDROID ===== */
 .mobile-menu {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0; /* Changed from right: -100% */
     width: 100%;
-    height: 100vh;
+    height: 100dvh; /* Changed to dvh for better Android support */
     background: var(--mamba-dark);
     z-index: 1001;
-    transition: right 0.3s ease;
+    transition: transform 0.3s ease; /* Changed from right to transform */
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
     padding-top: 0;
+    transform: translateX(100%); /* Use transform instead of right positioning */
 }
 
 .mobile-menu.active {
-    right: 0;
+    transform: translateX(0); /* Changed from right: 0 */
 }
 
 /* Mamba Logo in Mobile Menu - Larger */
@@ -285,6 +286,16 @@ strong {
     padding-left: 0;
     transform: translateX(5px);
     text-shadow: 0 0 10px rgba(153, 255, 0, 0.5);
+}
+
+/* ===== BODY SCROLL LOCK FIXES ===== */
+body.menu-open {
+    overflow: hidden !important;
+}
+
+/* Make sure mobile menu closes properly */
+.mobile-menu {
+    transition: transform 0.3s ease !important;
 }
 
 /* ===== HEADER ===== */
@@ -1024,9 +1035,172 @@ strong {
     text-shadow: 0 0 10px rgba(153, 255, 0, 0.3);
 }
 
-/* =========================================== */
-/* ========== RESPONSIVE DESIGN ========== */
-/* =========================================== */
+/* ===== HAMBURGER ANIMATION ===== */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ===== FLOAT UP ANIMATION ===== */
+.service-section-ar,
+.btn,
+.social-icon {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-section-ar:hover,
+.btn:hover,
+.social-icon:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== IMAGE OPTIMIZATION ===== */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.service-image-ar {
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+@media (hover: none) and (pointer: coarse) {
+    .service-image-ar:hover {
+        transform: none;
+    }
+    
+    .service-image-ar:hover img {
+        transform: none;
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+    
+    .service-icon-wrapper:hover {
+        transform: none;
+    }
+    
+    /* Increase touch targets */
+    .btn {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nav-link {
+        padding: 12px 10px;
+    }
+    
+    .mobile-link {
+        padding: 16px 0;
+    }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .float-on-scroll {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    
+    .whatsapp-float {
+        animation: none;
+    }
+}
+
+/* ===== SAFE AREA INSETS FOR NOTCHED DEVICES ===== */
+@supports (padding: max(0px)) {
+    .header,
+    .container,
+    .mobile-nav {
+        padding-left: max(15px, env(safe-area-inset-left));
+        padding-right: max(15px, env(safe-area-inset-right));
+    }
+    
+    .armed-response-hero {
+        padding-top: max(80px, env(safe-area-inset-top));
+    }
+    
+    .whatsapp-float {
+        bottom: max(20px, env(safe-area-inset-bottom));
+        right: max(20px, env(safe-area-inset-right));
+    }
+    
+    .footer {
+        padding-bottom: max(30px, env(safe-area-inset-bottom));
+    }
+}
+
+/* ===== K9 IMAGE MOBILE FIX ===== */
+/* Adjust the K9 image specifically for mobile devices */
+@media (max-width: 1024px) {
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 350px;
+        max-height: 450px;
+        padding: 20px;
+        background-color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .service-section-ar:nth-child(4) .service-image-ar img {
+        object-fit: contain;
+        width: auto;
+        max-width: 100%;
+        height: auto;
+        max-height: 100%;
+        background: #000;
+    }
+}
+
+/* For smaller mobile screens */
+@media (max-width: 767px) {
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 300px;
+        max-height: 400px;
+        padding: 15px;
+    }
+    
+    /* Make K9 image fill container better on mobile */
+    .service-section-ar:nth-child(4) .service-image-ar img {
+        object-fit: contain;
+        object-position: center center;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* For very small phones */
+@media (max-width: 424px) {
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 250px;
+        max-height: 350px;
+        padding: 10px;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
 
 /* DESKTOP: Show normal header, hide hamburger (1025px and above) */
 @media (min-width: 1025px) {
@@ -1376,34 +1550,20 @@ strong {
         font-size: 2.2rem;
     }
     
-   /* ===== EMERGENCY BUTTONS ICON SPACING ===== */
-.emergency-buttons .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    padding: clamp(12px, 3vw, 14px) clamp(25px, 4vw, 40px);
-}
-
-.emergency-buttons .btn i {
-    font-size: 1.2em;
-    flex-shrink: 0;
-}
-
-/* For mobile, adjust spacing */
-@media (max-width: 767px) {
+    /* EMERGENCY BUTTONS ICON SPACING */
     .emergency-buttons .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         gap: 12px;
         padding: 14px 25px;
     }
-}
-
-@media (max-width: 424px) {
-    .emergency-buttons .btn {
-        gap: 10px;
-        padding: 12px 20px;
+    
+    .emergency-buttons .btn i {
+        font-size: 1.1em;
+        flex-shrink: 0;
     }
-}
+    
     /* FOOTER FIXES FOR MOBILE */
     .footer-content {
         grid-template-columns: 1fr;
@@ -1578,6 +1738,12 @@ strong {
         font-size: 1.8rem;
     }
     
+    /* EMERGENCY BUTTONS ICON SPACING */
+    .emergency-buttons .btn {
+        gap: 10px;
+        padding: 12px 20px;
+    }
+    
     /* SOCIAL ICONS - ONE LINE, SCROLLABLE IF NEEDED */
     .social-icons {
         gap: 10px;
@@ -1683,6 +1849,12 @@ strong {
     
     .emergency-number {
         font-size: 1.6rem;
+    }
+    
+    /* EMERGENCY BUTTONS ICON SPACING */
+    .emergency-buttons .btn {
+        gap: 8px;
+        padding: 10px 15px;
     }
     
     /* SOCIAL ICONS */
@@ -1854,174 +2026,71 @@ strong {
     }
 }
 
-/* ===== HAMBURGER ANIMATION ===== */
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+/* ===== SAMSUNG NUCLEAR FIXES ===== */
+/* Force mobile menu closed initially */
+#mobileMenu {
+    transform: translateX(100%) !important;
+    -webkit-transform: translateX(100%) !important;
+    transition: transform 0.3s ease !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    right: 0 !important;
+    left: auto !important;
 }
 
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
+#mobileMenu.active {
+    transform: translateX(0) !important;
+    -webkit-transform: translateX(0) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-/* ===== BODY SCROLL LOCK ===== */
+/* Force body to not scroll when menu is open */
 body.menu-open {
-    overflow: hidden;
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
 }
 
-/* ===== FLOAT UP ANIMATION ===== */
-.service-section-ar,
-.btn,
-.social-icon {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Samsung specific tap highlight fix */
+* {
+    -webkit-tap-highlight-color: transparent !important;
+    tap-highlight-color: transparent !important;
 }
 
-.service-section-ar:hover,
-.btn:hover,
-.social-icon:hover {
-    transform: translateY(-5px);
+/* Ensure WhatsApp button is visible */
+.whatsapp-float {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
 }
 
-/* ===== IMAGE OPTIMIZATION ===== */
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-.service-image-ar {
-    overflow: hidden;
-    position: relative;
-}
-
-/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
-@media (hover: none) and (pointer: coarse) {
-    .service-image-ar:hover {
-        transform: none;
-    }
-    
-    .service-image-ar:hover img {
-        transform: none;
-    }
-    
-    .btn:hover {
-        transform: none;
-    }
-    
-    .service-icon-wrapper:hover {
-        transform: none;
-    }
-    
-    /* Increase touch targets */
-    .btn {
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .nav-link {
-        padding: 12px 10px;
-    }
-    
-    .mobile-link {
-        padding: 16px 0;
+/* Samsung Internet Browser */
+@supports (-webkit-touch-callout: none) {
+    .mobile-menu {
+        -webkit-overflow-scrolling: touch;
     }
 }
 
-/* ===== REDUCED MOTION ===== */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+/* Samsung WebKit browsers */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .mobile-menu {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
     }
     
-    .float-on-scroll {
-        opacity: 1;
-        transform: none;
-        transition: none;
+    .mobile-menu.active {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
     }
     
-    .whatsapp-float {
-        animation: none;
+    /* Fix for Samsung's tap highlight */
+    * {
+        -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
     }
 }
 
-/* ===== SAFE AREA INSETS FOR NOTCHED DEVICES ===== */
-@supports (padding: max(0px)) {
-    .header,
-    .container,
-    .mobile-nav {
-        padding-left: max(15px, env(safe-area-inset-left));
-        padding-right: max(15px, env(safe-area-inset-right));
-    }
-    
-    .armed-response-hero {
-        padding-top: max(80px, env(safe-area-inset-top));
-    }
-    
-    .whatsapp-float {
-        bottom: max(20px, env(safe-area-inset-bottom));
-        right: max(20px, env(safe-area-inset-right));
-    }
-    
-    .footer {
-        padding-bottom: max(30px, env(safe-area-inset-bottom));
-    }
-}
-/* ===== K9 IMAGE MOBILE FIX ===== */
-/* Adjust the K9 image specifically for mobile devices */
-@media (max-width: 1024px) {
-    .service-section-ar:nth-child(4) .service-image-ar {
-        min-height: 350px;
-        max-height: 450px;
-        padding: 20px;
-        background-color: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .service-section-ar:nth-child(4) .service-image-ar img {
-        object-fit: contain;
-        width: auto;
-        max-width: 100%;
-        height: auto;
-        max-height: 100%;
-        background: #000;
-    }
-}
-
-/* For smaller mobile screens */
-@media (max-width: 767px) {
-    .service-section-ar:nth-child(4) .service-image-ar {
-        min-height: 300px;
-        max-height: 400px;
-        padding: 15px;
-    }
-    
-    /* Make K9 image fill container better on mobile */
-    .service-section-ar:nth-child(4) .service-image-ar img {
-        object-fit: contain;
-        object-position: center center;
-        width: 100%;
-        height: 100%;
-    }
-}
-
-/* For very small phones */
-@media (max-width: 424px) {
-    .service-section-ar:nth-child(4) .service-image-ar {
-        min-height: 250px;
-        max-height: 350px;
-        padding: 10px;
-    }
-}
 
 
 
