@@ -1,17 +1,18 @@
-// ===== MOBILE MENU - FIXED FOR ALL DEVICES =====
+// ===== MOBILE MENU - COMPLETE SOLUTION =====
 let isMenuOpen = false;
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
 const body = document.body;
 
-// 1. FORCE INITIAL STATE - Menu closed on all devices
+// 1. INITIALIZE - Set everything to correct state
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Mobile Menu: DOM loaded - ensuring menu is closed');
+    console.log('DOM loaded - initializing mobile menu');
     
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
     
-    // CRITICAL: Force mobile menu to start closed
+    // Force mobile menu to start CLOSED
     if (mobileMenu) {
         mobileMenu.classList.remove('active');
         mobileMenu.style.transform = 'translateX(100%)';
@@ -46,53 +47,58 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hero) hero.style.backgroundColor = '#000000';
 });
 
-// 2. HAMBURGER CLICK HANDLER - SIMPLE & RELIABLE
+// 2. HAMBURGER CLICK - Open/close menu
 if (hamburger) {
-    // Remove any existing event listeners first
+    // Clone and replace to remove any existing event listeners
     const newHamburger = hamburger.cloneNode(true);
     hamburger.parentNode.replaceChild(newHamburger, hamburger);
     
-    // Get the new hamburger element
+    // Get fresh reference
     const freshHamburger = document.getElementById('hamburger');
     
     freshHamburger.addEventListener('click', function(e) {
-        console.log('Hamburger clicked - isMenuOpen:', isMenuOpen);
-        e.stopPropagation(); // Prevent event from bubbling up
+        console.log('Hamburger clicked - Current state:', isMenuOpen ? 'OPEN' : 'CLOSED');
+        e.stopPropagation();
         
-        // Check if popup is open - don't open menu if it is
+        // Don't open if popup is active
         const popupOverlay = document.getElementById('popupOverlay');
         if (popupOverlay && popupOverlay.classList.contains('active')) {
-            console.log('Popup is open, not opening menu');
+            console.log('Popup is open, ignoring hamburger click');
             return;
         }
         
         if (!isMenuOpen) {
-            // OPEN MENU
-            console.log('Opening mobile menu');
             openMobileMenu();
         } else {
-            // CLOSE MENU
-            console.log('Closing mobile menu');
             closeMobileMenu();
         }
     });
 }
 
-// 3. OPEN MOBILE MENU FUNCTION
+// 3. MOBILE MENU CLOSE BUTTON
+if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', function(e) {
+        console.log('Close button (X) clicked');
+        e.stopPropagation();
+        closeMobileMenu();
+    });
+}
+
+// 4. OPEN MOBILE MENU FUNCTION
 function openMobileMenu() {
-    console.log('openMobileMenu called');
+    console.log('Opening mobile menu');
     isMenuOpen = true;
     
     if (mobileMenu) {
-        // First make it visible but off-screen
+        // First, make sure it's visible but off-screen
         mobileMenu.style.display = 'block';
         mobileMenu.style.visibility = 'visible';
         mobileMenu.style.opacity = '0';
         mobileMenu.style.transform = 'translateX(100%)';
         mobileMenu.style.webkitTransform = 'translateX(100%)';
         
-        // Force reflow
-        mobileMenu.offsetHeight;
+        // Force reflow to ensure CSS sees the change
+        void mobileMenu.offsetWidth;
         
         // Then animate it in
         setTimeout(() => {
@@ -115,18 +121,18 @@ function openMobileMenu() {
         hamburger.classList.add('active');
     }
     
-    // Hide WhatsApp float when menu is open
+    // Hide WhatsApp button when menu is open
     const whatsappFloat = document.querySelector('.whatsapp-float');
     if (whatsappFloat) {
         whatsappFloat.style.display = 'none';
     }
     
-    console.log('Menu opened successfully');
+    console.log('Mobile menu opened successfully');
 }
 
-// 4. CLOSE MOBILE MENU FUNCTION
+// 5. CLOSE MOBILE MENU FUNCTION
 function closeMobileMenu() {
-    console.log('closeMobileMenu called');
+    console.log('Closing mobile menu');
     isMenuOpen = false;
     
     if (mobileMenu) {
@@ -135,12 +141,12 @@ function closeMobileMenu() {
         mobileMenu.style.transform = 'translateX(100%)';
         mobileMenu.style.webkitTransform = 'translateX(100%)';
         
-        // Remove active class after animation
+        // After animation, hide it completely
         setTimeout(() => {
             mobileMenu.classList.remove('active');
             mobileMenu.style.visibility = 'hidden';
             mobileMenu.style.display = 'none';
-        }, 300); // Match CSS transition time
+        }, 300);
     }
     
     if (body) {
@@ -155,7 +161,7 @@ function closeMobileMenu() {
         hamburger.classList.remove('active');
     }
     
-    // Show WhatsApp float after menu closes
+    // Show WhatsApp button after menu closes
     setTimeout(() => {
         const whatsappFloat = document.querySelector('.whatsapp-float');
         if (whatsappFloat) {
@@ -165,20 +171,24 @@ function closeMobileMenu() {
         }
     }, 350);
     
-    console.log('Menu closed successfully');
+    console.log('Mobile menu closed successfully');
 }
 
-// 5. CLOSE MENU WHEN CLICKING MOBILE LINKS
+// 6. CLOSE MENU WHEN CLICKING MOBILE LINKS
 document.querySelectorAll('.mobile-link').forEach(function(link) {
     link.addEventListener('click', function(e) {
         console.log('Mobile link clicked, closing menu');
         e.stopPropagation();
-        closeMobileMenu();
         
-        // If it's an anchor link, scroll after closing menu
+        // If it's an anchor link, handle smooth scroll
         const href = this.getAttribute('href');
         if (href && href.startsWith('#')) {
             e.preventDefault();
+            
+            // Close menu first
+            closeMobileMenu();
+            
+            // Then scroll to target
             setTimeout(() => {
                 const targetElement = document.querySelector(href);
                 if (targetElement) {
@@ -191,26 +201,30 @@ document.querySelectorAll('.mobile-link').forEach(function(link) {
                     });
                 }
             }, 400);
+        } else {
+            // Regular link, just close menu
+            closeMobileMenu();
         }
     });
 });
 
-// 6. CLOSE MENU WHEN CLICKING OUTSIDE
+// 7. CLOSE MENU WHEN CLICKING OUTSIDE
 document.addEventListener('click', function(e) {
     if (!isMenuOpen) return;
     
-    // Check if click is inside menu or on hamburger
-    const isClickInsideMenu = mobileMenu && mobileMenu.contains(e.target);
-    const isClickOnHamburger = hamburger && hamburger.contains(e.target);
+    // Check what was clicked
+    const clickedInMenu = mobileMenu && mobileMenu.contains(e.target);
+    const clickedOnHamburger = hamburger && hamburger.contains(e.target);
+    const clickedOnCloseButton = mobileMenuClose && mobileMenuClose.contains(e.target);
     
-    // If click is outside menu AND not on hamburger, close menu
-    if (!isClickInsideMenu && !isClickOnHamburger) {
+    // If clicked outside menu AND not on hamburger/close button, close menu
+    if (!clickedInMenu && !clickedOnHamburger && !clickedOnCloseButton) {
         console.log('Clicked outside menu, closing it');
         closeMobileMenu();
     }
 });
 
-// 7. CLOSE MENU WITH ESCAPE KEY
+// 8. CLOSE MENU WITH ESCAPE KEY
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && isMenuOpen) {
         console.log('Escape key pressed, closing menu');
@@ -218,12 +232,12 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// 8. DOUBLE-CHECK MENU IS CLOSED ON PAGE LOAD
+// 9. DOUBLE-CHECK ON PAGE LOAD
 window.addEventListener('load', function() {
-    console.log('Page fully loaded - final menu check');
+    console.log('Page loaded - final menu check');
     
-    // Extra safety: ensure menu is closed
     setTimeout(() => {
+        // Ensure menu is closed
         if (mobileMenu) {
             mobileMenu.classList.remove('active');
             mobileMenu.style.transform = 'translateX(100%)';
@@ -243,11 +257,11 @@ window.addEventListener('load', function() {
             hamburger.classList.remove('active');
         }
         
-        console.log('Final menu state: CLOSED');
+        console.log('Menu state confirmed: CLOSED');
     }, 100);
 });
 
-// 9. HERO SLIDER
+// ===== HERO SLIDER =====
 const heroSlides = document.querySelectorAll('.slide');
 const heroPrevBtn = document.querySelector('.hero-prev');
 const heroNextBtn = document.querySelector('.hero-next');
@@ -320,10 +334,11 @@ if (heroSlides.length > 0) {
         });
     });
     
+    // Initialize
     showHeroSlide(0);
     startHeroSlider();
     
-    // Pause slider when user hovers over it
+    // Pause on hover
     const heroSlider = document.querySelector('.hero-slider');
     if (heroSlider) {
         heroSlider.addEventListener('mouseenter', stopHeroSlider);
@@ -331,7 +346,7 @@ if (heroSlides.length > 0) {
     }
 }
 
-// 10. TESTIMONIALS SLIDER
+// ===== TESTIMONIALS SLIDER =====
 const testimonialsTrack = document.querySelector('.testimonials-track');
 const testimonialItems = document.querySelectorAll('.testimonial-item');
 const testimonialPrevBtn = document.querySelector('.slider-prev');
@@ -372,14 +387,14 @@ if (testimonialsTrack && testimonialItems.length > 0) {
         });
     }
     
-    // Adjust on window resize
+    // Handle window resize
     window.addEventListener('resize', updateTestimonialSlider);
     
     // Initialize
     updateTestimonialSlider();
 }
 
-// 11. FAQ TOGGLE
+// ===== FAQ TOGGLE =====
 document.querySelectorAll('.faq-question').forEach(question => {
     question.addEventListener('click', () => {
         const faqItem = question.parentElement;
@@ -403,7 +418,7 @@ document.querySelectorAll('.faq-question').forEach(question => {
     });
 });
 
-// 12. POPUP MODAL
+// ===== POPUP MODAL =====
 const popupClose = document.getElementById('popupClose');
 const newsletterForm = document.getElementById('newsletterForm');
 const popupOverlay = document.getElementById('popupOverlay');
@@ -476,8 +491,10 @@ if (newsletterForm) {
             // Show error
             if (emailInput) {
                 emailInput.style.borderColor = '#ff3b30';
+                emailInput.placeholder = 'Please enter a valid email';
                 setTimeout(() => {
                     emailInput.style.borderColor = '';
+                    emailInput.placeholder = 'Your Email Address';
                 }, 2000);
             }
         }
@@ -490,7 +507,7 @@ if (!sessionStorage.getItem('popupShown')) {
     sessionStorage.setItem('popupShown', 'true');
 }
 
-// 13. COOKIE CONSENT
+// ===== COOKIE CONSENT =====
 const cookieAcceptAll = document.getElementById('cookieAcceptAll');
 const cookieCustomize = document.getElementById('cookieCustomize');
 const cookieDecline = document.getElementById('cookieDecline');
@@ -595,7 +612,7 @@ if (cookieConsentOverlay) {
     });
 }
 
-// 14. ANIMATIONS ON SCROLL
+// ===== SCROLL ANIMATIONS =====
 const floatUpElements = document.querySelectorAll('.float-up');
 
 function checkFloatUp() {
@@ -617,12 +634,12 @@ floatUpElements.forEach(element => {
     element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 });
 
-// Check on scroll and on load
+// Check on scroll and load
 window.addEventListener('scroll', checkFloatUp);
 setTimeout(checkFloatUp, 300);
 window.addEventListener('load', checkFloatUp);
 
-// 15. HEADER SCROLL EFFECT
+// ===== HEADER SCROLL EFFECT =====
 let lastScrollTop = 0;
 const header = document.querySelector('.header');
 
@@ -640,14 +657,14 @@ if (header) {
     });
 }
 
-// 16. SMOOTH SCROLL FOR ANCHOR LINKS
+// ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
         
         if (href === '#') return;
         
-        // Don't prevent default for #home - let it scroll naturally
+        // Don't prevent default for #home
         if (href !== '#home') {
             e.preventDefault();
         }
@@ -670,7 +687,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// 17. IMAGE LAZY LOADING
+// ===== IMAGE LAZY LOADING =====
 const images = document.querySelectorAll('img[loading="lazy"]');
 if ('IntersectionObserver' in window && images.length > 0) {
     const imageObserver = new IntersectionObserver((entries) => {
@@ -686,10 +703,10 @@ if ('IntersectionObserver' in window && images.length > 0) {
     images.forEach(img => imageObserver.observe(img));
 }
 
-// 18. WHATSAPP BUTTON PULSE ANIMATION
+// ===== WHATSAPP BUTTON ANIMATIONS =====
 const whatsappBtn = document.querySelector('.whatsapp-float');
 if (whatsappBtn) {
-    // Remove any existing animation
+    // Initial animation
     whatsappBtn.style.animation = 'floatWhatsApp 3s ease-in-out infinite';
     
     // Add pulse animation every 8 seconds
@@ -701,7 +718,7 @@ if (whatsappBtn) {
     }, 8000);
 }
 
-// 19. SERVICE CARDS HOVER EFFECT (for desktop only)
+// ===== SERVICE CARDS HOVER EFFECT (Desktop only) =====
 if (window.innerWidth > 768) {
     const serviceCards = document.querySelectorAll('.detailed-service-card');
     serviceCards.forEach(card => {
@@ -717,7 +734,7 @@ if (window.innerWidth > 768) {
     });
 }
 
-// 20. TOUCH DEVICE OPTIMIZATION
+// ===== TOUCH DEVICE OPTIMIZATION =====
 if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     document.body.classList.add('touch-device');
     
@@ -728,7 +745,7 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
     });
 }
 
-// 21. REDUCED MOTION PREFERENCE
+// ===== REDUCED MOTION PREFERENCE =====
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // Stop all animations
     document.querySelectorAll('*').forEach(element => {
@@ -743,6 +760,15 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     }
 }
 
-// 22. CONSOLE GREETING
+// ===== RESIZE HANDLER =====
+window.addEventListener('resize', function() {
+    // Close mobile menu if window gets too large
+    if (window.innerWidth > 1024 && isMenuOpen) {
+        closeMobileMenu();
+    }
+});
+
+// ===== CONSOLE MESSAGES =====
 console.log('Mamba Security website loaded successfully');
-console.log('Mobile Menu: Script loaded - hamburger menu should work on all devices');
+console.log('Mobile menu with close button ready');
+console.log('JavaScript initialization complete');
