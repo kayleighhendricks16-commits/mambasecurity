@@ -765,7 +765,7 @@ strong {
 .service-section-ar.float-on-scroll:nth-child(4) { transition-delay: 0.4s; }
 .service-section-ar.float-on-scroll:nth-child(5) { transition-delay: 0.5s; }
 
-/* ===== FOOTER - FIXED FOR MOBILE ===== */
+/* ===== FOOTER - EXACT SAME AS TECH PAGE ===== */
 .footer {
     background: var(--mamba-gray);
     padding: clamp(40px, 8vw, 60px) 0 30px;
@@ -984,7 +984,7 @@ strong {
     margin-top: 2px;
 }
 
-/* ===== FOOTER RESOURCES SECTION - ADDED ===== */
+/* ===== FOOTER RESOURCES SECTION ===== */
 .footer-resources ul {
     list-style: none;
     display: grid;
@@ -1049,283 +1049,8 @@ strong {
     text-shadow: 0 0 10px rgba(153, 255, 0, 0.3);
 }
 
-/* ===== MOBILE-SPECIFIC IMAGE ADJUSTMENTS ===== */
-/* For very small phones (under 425px) */
-@media (max-width: 424px) {
-    /* Make AD HOC image (adhoc.png) much bigger on mobile */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 380px !important;
-        max-height: 450px !important;
-        padding: 10px !important;
-    }
-    
-    .service-section-ar:nth-child(5) .service-image-ar img {
-        max-width: 95% !important;
-        max-height: 95% !important;
-        object-fit: contain !important;
-    }
-    
-    /* Make Secure Estates image (SE.avif) much bigger on mobile */
-    .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 420px !important;
-        max-height: 500px !important;
-        padding: 10px !important;
-    }
-    
-    .service-section-ar:nth-child(3) .service-image-ar img {
-        max-width: 90% !important;
-        max-height: 90% !important;
-        object-fit: contain !important;
-    }
-    
-    /* Button spacing adjustments for very small phones */
-    .emergency-buttons .btn {
-        gap: 10px;
-        padding: 12px 20px;
-    }
-}
-
-/* For small phones (375px - 424px) */
-@media (max-width: 424px) and (min-width: 375px) {
-    /* AD HOC image */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 400px !important;
-        max-height: 470px !important;
-        padding: 12px !important;
-    }
-    
-    /* Secure Estates image */
-    .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 450px !important;
-        max-height: 530px !important;
-        padding: 12px !important;
-    }
-}
-
-/* For medium phones (425px - 599px) */
-@media (max-width: 599px) and (min-width: 425px) {
-    /* AD HOC image */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 380px !important;
-        max-height: 450px !important;
-        padding: 15px !important;
-    }
-    
-    .service-section-ar:nth-child(5) .service-image-ar img {
-        max-width: 90% !important;
-        max-height: 90% !important;
-    }
-    
-    /* Secure Estates image */
-    .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 450px !important;
-        max-height: 520px !important;
-        padding: 15px !important;
-    }
-    
-    .service-section-ar:nth-child(3) .service-image-ar img {
-        max-width: 85% !important;
-        max-height: 85% !important;
-    }
-    
-    /* Button spacing adjustments */
-    .emergency-buttons .btn {
-        gap: 10px;
-        padding: 12px 20px;
-    }
-}
-
-/* For large phones (600px - 767px) */
-@media (max-width: 767px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .logo {
-        order: 3;
-        margin-left: auto;
-        margin-right: 0;
-        padding: 15px 0;
-    }
-    
-    .logo-image {
-        height: 75px;
-        max-width: 220px;
-    }
-    
-    .mobile-logo-image {
-        height: 75px;
-        max-width: 220px;
-    }
-    
-    .armed-response-hero {
-        padding: 80px 0 40px;
-        min-height: 60vh;
-    }
-    
-    .armed-response-hero h1 {
-        font-size: 2rem;
-    }
-    
-    .service-sections-container {
-        padding: 40px 0;
-    }
-    
-    .service-section-ar {
-        gap: 30px;
-    }
-    
-    .service-header-ar h2 {
-        font-size: 1.6rem;
-    }
-    
-    .service-icon-wrapper {
-        width: 60px;
-        height: 60px;
-        padding: 6px;
-    }
-    
-    .service-header-ar {
-        gap: 15px;
-    }
-    
-    .service-image-ar {
-        min-height: 300px;
-        max-height: 380px;
-    }
-    
-    /* Specific adjustments for SE.avif on large phones */
-    .service-section-ar:nth-child(3) .service-image-ar {
-        min-height: 400px !important;
-        max-height: 480px !important;
-        padding: 15px !important;
-    }
-    
-    .service-section-ar:nth-child(3) .service-image-ar img {
-        max-width: 75% !important;
-        max-height: 75% !important;
-    }
-    
-    /* Specific adjustments for adhoc.png on large phones */
-    .service-section-ar:nth-child(5) .service-image-ar {
-        min-height: 350px !important;
-        max-height: 420px !important;
-        padding: 10px !important;
-    }
-    
-    .service-section-ar:nth-child(5) .service-image-ar img {
-        max-width: 80% !important;
-        max-height: 80% !important;
-    }
-    
-    .service-section-ar:nth-child(1) .service-image-ar,
-    .service-section-ar:nth-child(2) .service-image-ar,
-    .service-section-ar:nth-child(4) .service-image-ar {
-        min-height: 300px;
-        max-height: 380px;
-    }
-    
-    .service-image-ar .overlay-btn {
-        padding: 12px 25px;
-        font-size: 1.1rem;
-        min-width: 200px;
-    }
-    
-    .emergency-cta {
-        padding: 50px 0;
-    }
-    
-    .emergency-cta h2 {
-        font-size: 1.8rem;
-    }
-    
-    .emergency-number {
-        font-size: 2.2rem;
-    }
-    
-    .emergency-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .emergency-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-        gap: 12px;
-        padding: 14px 25px;
-    }
-    
-    /* FOOTER FIXES FOR MOBILE */
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        text-align: center;
-    }
-    
-    .footer-logo-image {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .footer-brand p,
-    .tribe-footer p,
-    .footer-contact-info p,
-    .footer-services a,
-    .footer-resources a {
-        text-align: center;
-    }
-    
-    /* SOCIAL ICONS - CENTERED AND IN ONE LINE ON MOBILE */
-    .social-icons {
-        justify-content: center;
-        gap: 12px;
-        overflow-x: auto;
-        padding: 5px 0;
-    }
-    
-    .social-icon {
-        width: 44px;
-        height: 44px;
-        font-size: 1.1rem;
-    }
-    
-    .footer-services ul,
-    .footer-resources ul {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-    
-    .footer-contact-info p {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 5px;
-    }
-    
-    .footer-contact-info i {
-        margin-top: 0;
-    }
-    
-    .footer-links {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .footer-links a {
-        display: block;
-        margin: 0;
-    }
-    
-    .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 65px;
-        height: 65px;
-    }
-}
-
 /* =========================================== */
-/* ========== RESPONSIVE DESIGN - FIXED ========== */
+/* ========== RESPONSIVE DESIGN ========== */
 /* =========================================== */
 
 /* DESKTOP: Show normal header, hide hamburger (1025px and above) */
@@ -1473,7 +1198,7 @@ strong {
         min-width: 220px;
     }
     
-    /* FOOTER FIXES FOR TABLET */
+    /* FOOTER FIXES FOR TABLET - SAME AS TECH PAGE */
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
@@ -1520,10 +1245,9 @@ strong {
     }
 }
 
-/* iPAD PRO PORTRAIT (768px - 1024px) */
-@media (max-width: 1024px) and (min-width: 768px) {
+/* LARGE PHONES (600px - 767px) */
+@media (max-width: 767px) {
     .container {
-        max-width: 95%;
         padding: 0 15px;
     }
     
@@ -1531,62 +1255,182 @@ strong {
         order: 3;
         margin-left: auto;
         margin-right: 0;
-        padding: 12px 0;
+        padding: 15px 0;
     }
     
     .logo-image {
-        height: 80px;
-        max-width: 240px;
+        height: 75px;
+        max-width: 220px;
     }
     
     .mobile-logo-image {
-        height: 80px;
-        max-width: 240px;
+        height: 75px;
+        max-width: 220px;
     }
     
     .armed-response-hero {
-        padding: 90px 0 50px;
-        min-height: 70vh;
+        padding: 80px 0 40px;
+        min-height: 60vh;
     }
     
     .armed-response-hero h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
     
     .service-sections-container {
-        padding: 50px 0;
+        padding: 40px 0;
     }
     
     .service-section-ar {
-        gap: 35px;
+        gap: 30px;
     }
     
     .service-header-ar h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .service-icon-wrapper {
-        width: 65px;
-        height: 65px;
-        padding: 7px;
+        width: 60px;
+        height: 60px;
+        padding: 6px;
     }
     
     .service-header-ar {
         gap: 15px;
     }
     
-    /* FOOTER FIXES */
-    .footer-content {
-        gap: 25px;
+    .service-image-ar {
+        min-height: 300px;
+        max-height: 380px;
     }
     
+    /* Specific adjustments for SE.avif on large phones */
+    .service-section-ar:nth-child(3) .service-image-ar {
+        min-height: 400px !important;
+        max-height: 480px !important;
+        padding: 15px !important;
+    }
+    
+    .service-section-ar:nth-child(3) .service-image-ar img {
+        max-width: 75% !important;
+        max-height: 75% !important;
+    }
+    
+    /* Specific adjustments for adhoc.png on large phones */
+    .service-section-ar:nth-child(5) .service-image-ar {
+        min-height: 350px !important;
+        max-height: 420px !important;
+        padding: 10px !important;
+    }
+    
+    .service-section-ar:nth-child(5) .service-image-ar img {
+        max-width: 80% !important;
+        max-height: 80% !important;
+    }
+    
+    .service-section-ar:nth-child(1) .service-image-ar,
+    .service-section-ar:nth-child(2) .service-image-ar,
+    .service-section-ar:nth-child(4) .service-image-ar {
+        min-height: 300px;
+        max-height: 380px;
+    }
+    
+    .service-image-ar .overlay-btn {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        min-width: 200px;
+    }
+    
+    .emergency-cta {
+        padding: 50px 0;
+    }
+    
+    .emergency-cta h2 {
+        font-size: 1.8rem;
+    }
+    
+    .emergency-number {
+        font-size: 2.2rem;
+    }
+    
+    .emergency-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .emergency-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+        gap: 12px;
+        padding: 14px 25px;
+    }
+    
+    /* FOOTER FIXES FOR MOBILE - EXACT SAME AS TECH PAGE */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-logo-image {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .footer-brand p,
+    .tribe-footer p,
+    .footer-contact-info p,
+    .footer-services a,
+    .footer-resources a {
+        text-align: center;
+    }
+    
+    /* SOCIAL ICONS - CENTERED AND IN ONE LINE ON MOBILE */
     .social-icons {
-        gap: 8px;
+        justify-content: center;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 5px 0;
     }
     
     .social-icon {
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+    
+    .footer-services ul,
+    .footer-resources ul {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .footer-contact-info p {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .footer-contact-info i {
+        margin-top: 0;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .footer-links a {
+        display: block;
+        margin: 0;
+    }
+    
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 65px;
+        height: 65px;
     }
 }
 
@@ -1876,7 +1720,7 @@ strong {
         padding: 10px 15px;
     }
     
-    /* FOOTER FIXES FOR VERY SMALL PHONES */
+    /* FOOTER FIXES FOR VERY SMALL PHONES - EXACT SAME AS TECH PAGE */
     .footer-content {
         gap: 25px;
     }
@@ -2051,3 +1895,4 @@ img {
         padding-bottom: max(30px, env(safe-area-inset-bottom));
     }
 }
+
