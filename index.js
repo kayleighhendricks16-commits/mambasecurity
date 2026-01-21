@@ -1,264 +1,73 @@
-// ===== MOBILE MENU - COMPLETE SOLUTION =====
-let isMenuOpen = false;
+// ===== MOBILE MENU =====
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
-const mobileMenuClose = document.getElementById('mobileMenuClose');
 const body = document.body;
+const whatsappFloat = document.querySelector('.whatsapp-float');
 
-// 1. INITIALIZE - Set everything to correct state
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded - initializing mobile menu');
-    
-    // Set current year in footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    
-    // Force mobile menu to start CLOSED
-    if (mobileMenu) {
-        mobileMenu.classList.remove('active');
-        mobileMenu.style.transform = 'translateX(100%)';
-        mobileMenu.style.webkitTransform = 'translateX(100%)';
-        mobileMenu.style.visibility = 'hidden';
-        mobileMenu.style.opacity = '0';
-        mobileMenu.style.display = 'none';
-    }
-    
-    if (body) {
-        body.classList.remove('menu-open', 'popup-open', 'cookie-open');
-        body.style.overflow = 'auto';
-        body.style.position = 'static';
-    }
-    
-    if (hamburger) {
-        hamburger.classList.remove('active');
-    }
-    
-    // Force WhatsApp button visible
-    const whatsappFloat = document.querySelector('.whatsapp-float');
-    if (whatsappFloat) {
-        whatsappFloat.style.display = 'flex';
-        whatsappFloat.style.visibility = 'visible';
-        whatsappFloat.style.opacity = '1';
-        whatsappFloat.style.zIndex = '9999';
-    }
-    
-    // Set black backgrounds
-    document.body.style.backgroundColor = '#000000';
-    const hero = document.querySelector('.hero');
-    if (hero) hero.style.backgroundColor = '#000000';
-});
-
-// 2. HAMBURGER CLICK - Open/close menu
-if (hamburger) {
-    // Clone and replace to remove any existing event listeners
-    const newHamburger = hamburger.cloneNode(true);
-    hamburger.parentNode.replaceChild(newHamburger, hamburger);
-    
-    // Get fresh reference
-    const freshHamburger = document.getElementById('hamburger');
-    
-    freshHamburger.addEventListener('click', function(e) {
-        console.log('Hamburger clicked - Current state:', isMenuOpen ? 'OPEN' : 'CLOSED');
-        e.stopPropagation();
+if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        body.classList.toggle('menu-open');
+        hamburger.classList.toggle('active');
         
-        // Don't open if popup is active
-        const popupOverlay = document.getElementById('popupOverlay');
-        if (popupOverlay && popupOverlay.classList.contains('active')) {
-            console.log('Popup is open, ignoring hamburger click');
-            return;
-        }
-        
-        if (!isMenuOpen) {
-            openMobileMenu();
+        // Hide/show WhatsApp button
+        if (mobileMenu.classList.contains('active')) {
+            if (whatsappFloat) whatsappFloat.style.display = 'none';
         } else {
-            closeMobileMenu();
+            if (whatsappFloat) whatsappFloat.style.display = 'flex';
         }
     });
-}
 
-// 3. MOBILE MENU CLOSE BUTTON
-if (mobileMenuClose) {
-    mobileMenuClose.addEventListener('click', function(e) {
-        console.log('Close button (X) clicked');
-        e.stopPropagation();
-        closeMobileMenu();
-    });
-}
-
-// 4. OPEN MOBILE MENU FUNCTION
-function openMobileMenu() {
-    console.log('Opening mobile menu');
-    isMenuOpen = true;
-    
-    if (mobileMenu) {
-        // First, make sure it's visible but off-screen
-        mobileMenu.style.display = 'block';
-        mobileMenu.style.visibility = 'visible';
-        mobileMenu.style.opacity = '0';
-        mobileMenu.style.transform = 'translateX(100%)';
-        mobileMenu.style.webkitTransform = 'translateX(100%)';
-        
-        // Force reflow to ensure CSS sees the change
-        void mobileMenu.offsetWidth;
-        
-        // Then animate it in
-        setTimeout(() => {
-            mobileMenu.classList.add('active');
-            mobileMenu.style.opacity = '1';
-            mobileMenu.style.transform = 'translateX(0)';
-            mobileMenu.style.webkitTransform = 'translateX(0)';
-        }, 10);
-    }
-    
-    if (body) {
-        body.classList.add('menu-open');
-        body.style.overflow = 'hidden';
-        body.style.position = 'fixed';
-        body.style.width = '100%';
-        body.style.height = '100%';
-    }
-    
-    if (hamburger) {
-        hamburger.classList.add('active');
-    }
-    
-    // Hide WhatsApp button when menu is open
-    const whatsappFloat = document.querySelector('.whatsapp-float');
-    if (whatsappFloat) {
-        whatsappFloat.style.display = 'none';
-    }
-    
-    console.log('Mobile menu opened successfully');
-}
-
-// 5. CLOSE MOBILE MENU FUNCTION
-function closeMobileMenu() {
-    console.log('Closing mobile menu');
-    isMenuOpen = false;
-    
-    if (mobileMenu) {
-        // Animate out
-        mobileMenu.style.opacity = '0';
-        mobileMenu.style.transform = 'translateX(100%)';
-        mobileMenu.style.webkitTransform = 'translateX(100%)';
-        
-        // After animation, hide it completely
-        setTimeout(() => {
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
-            mobileMenu.style.visibility = 'hidden';
-            mobileMenu.style.display = 'none';
-        }, 300);
-    }
-    
-    if (body) {
-        body.classList.remove('menu-open');
-        body.style.overflow = 'auto';
-        body.style.position = 'static';
-        body.style.width = 'auto';
-        body.style.height = 'auto';
-    }
-    
-    if (hamburger) {
-        hamburger.classList.remove('active');
-    }
-    
-    // Show WhatsApp button after menu closes
-    setTimeout(() => {
-        const whatsappFloat = document.querySelector('.whatsapp-float');
-        if (whatsappFloat) {
-            whatsappFloat.style.display = 'flex';
-            whatsappFloat.style.visibility = 'visible';
-            whatsappFloat.style.opacity = '1';
-        }
-    }, 350);
-    
-    console.log('Mobile menu closed successfully');
-}
-
-// 6. CLOSE MENU WHEN CLICKING MOBILE LINKS
-document.querySelectorAll('.mobile-link').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-        console.log('Mobile link clicked, closing menu');
-        e.stopPropagation();
-        
-        // If it's an anchor link, handle smooth scroll
-        const href = this.getAttribute('href');
-        if (href && href.startsWith('#')) {
-            e.preventDefault();
-            
-            // Close menu first
-            closeMobileMenu();
-            
-            // Then scroll to target
-            setTimeout(() => {
-                const targetElement = document.querySelector(href);
-                if (targetElement) {
-                    const headerHeight = document.querySelector('.header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }, 400);
-        } else {
-            // Regular link, just close menu
-            closeMobileMenu();
-        }
-    });
-});
-
-// 7. CLOSE MENU WHEN CLICKING OUTSIDE
-document.addEventListener('click', function(e) {
-    if (!isMenuOpen) return;
-    
-    // Check what was clicked
-    const clickedInMenu = mobileMenu && mobileMenu.contains(e.target);
-    const clickedOnHamburger = hamburger && hamburger.contains(e.target);
-    const clickedOnCloseButton = mobileMenuClose && mobileMenuClose.contains(e.target);
-    
-    // If clicked outside menu AND not on hamburger/close button, close menu
-    if (!clickedInMenu && !clickedOnHamburger && !clickedOnCloseButton) {
-        console.log('Clicked outside menu, closing it');
-        closeMobileMenu();
-    }
-});
-
-// 8. CLOSE MENU WITH ESCAPE KEY
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && isMenuOpen) {
-        console.log('Escape key pressed, closing menu');
-        closeMobileMenu();
-    }
-});
-
-// 9. DOUBLE-CHECK ON PAGE LOAD
-window.addEventListener('load', function() {
-    console.log('Page loaded - final menu check');
-    
-    setTimeout(() => {
-        // Ensure menu is closed
-        if (mobileMenu) {
-            mobileMenu.classList.remove('active');
-            mobileMenu.style.transform = 'translateX(100%)';
-            mobileMenu.style.webkitTransform = 'translateX(100%)';
-            mobileMenu.style.visibility = 'hidden';
-            mobileMenu.style.opacity = '0';
-            mobileMenu.style.display = 'none';
-        }
-        
-        if (body) {
             body.classList.remove('menu-open');
-            body.style.overflow = 'auto';
-            body.style.position = 'static';
-        }
-        
-        if (hamburger) {
             hamburger.classList.remove('active');
+            if (whatsappFloat) whatsappFloat.style.display = 'flex';
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && 
+            !hamburger.contains(e.target) && 
+            mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            body.classList.remove('menu-open');
+            hamburger.classList.remove('active');
+            if (whatsappFloat) whatsappFloat.style.display = 'flex';
         }
-        
-        console.log('Menu state confirmed: CLOSED');
-    }, 100);
+    });
+    
+    // Close mobile menu with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+                hamburger.classList.remove('active');
+                if (whatsappFloat) whatsappFloat.style.display = 'flex';
+            }
+        }
+    });
+}
+
+// Set current year in footer
+if (document.getElementById('currentYear')) {
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+}
+
+// ===== HEADER SCROLL EFFECT =====
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (header) {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
 });
 
 // ===== HERO SLIDER =====
@@ -425,21 +234,17 @@ const popupOverlay = document.getElementById('popupOverlay');
 
 function showPopup() {
     // Close mobile menu first if open
-    if (isMenuOpen) {
-        closeMobileMenu();
+    if (mobileMenu && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        body.classList.remove('menu-open');
+        if (hamburger) hamburger.classList.remove('active');
+        if (whatsappFloat) whatsappFloat.style.display = 'flex';
     }
     
     setTimeout(() => {
         if (popupOverlay) {
             popupOverlay.classList.add('active');
             body.classList.add('popup-open');
-            
-            // Disable hamburger when popup is open
-            if (hamburger) hamburger.style.pointerEvents = 'none';
-            
-            // Hide WhatsApp float when popup is open
-            const whatsappFloat = document.querySelector('.whatsapp-float');
-            if (whatsappFloat) whatsappFloat.style.display = 'none';
         }
     }, 3000);
 }
@@ -449,15 +254,6 @@ function hidePopup() {
         popupOverlay.classList.remove('active');
         body.classList.remove('popup-open');
     }
-    
-    // Re-enable hamburger
-    if (hamburger) hamburger.style.pointerEvents = 'auto';
-    
-    // Show WhatsApp float after popup closes
-    setTimeout(() => {
-        const whatsappFloat = document.querySelector('.whatsapp-float');
-        if (whatsappFloat) whatsappFloat.style.display = 'flex';
-    }, 300);
 }
 
 if (popupClose) {
@@ -639,24 +435,6 @@ window.addEventListener('scroll', checkFloatUp);
 setTimeout(checkFloatUp, 300);
 window.addEventListener('load', checkFloatUp);
 
-// ===== HEADER SCROLL EFFECT =====
-let lastScrollTop = 0;
-const header = document.querySelector('.header');
-
-if (header) {
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        lastScrollTop = scrollTop;
-    });
-}
-
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -678,11 +456,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: targetPosition,
                 behavior: 'smooth'
             });
-            
-            // Close mobile menu if open
-            if (isMenuOpen) {
-                closeMobileMenu();
-            }
         }
     });
 });
@@ -763,12 +536,25 @@ if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 // ===== RESIZE HANDLER =====
 window.addEventListener('resize', function() {
     // Close mobile menu if window gets too large
-    if (window.innerWidth > 1024 && isMenuOpen) {
-        closeMobileMenu();
+    if (window.innerWidth > 1024 && mobileMenu && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        body.classList.remove('menu-open');
+        if (hamburger) hamburger.classList.remove('active');
+        if (whatsappFloat) whatsappFloat.style.display = 'flex';
     }
 });
 
-// ===== CONSOLE MESSAGES =====
-console.log('Mamba Security website loaded successfully');
-console.log('Mobile menu with close button ready');
-console.log('JavaScript initialization complete');
+// ===== INITIALIZE ON LOAD =====
+window.addEventListener('load', function() {
+    console.log('Mamba Security website loaded successfully');
+    
+    // Ensure WhatsApp button is visible
+    if (whatsappFloat) {
+        whatsappFloat.style.display = 'flex';
+        whatsappFloat.style.opacity = '1';
+        whatsappFloat.style.visibility = 'visible';
+    }
+    
+    // Initial float-up check
+    setTimeout(checkFloatUp, 100);
+});
