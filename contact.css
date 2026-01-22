@@ -234,23 +234,24 @@ strong {
     border-radius: 2px;
 }
 
-/* Mobile Menu */
+/* ===== MOBILE MENU - FIXED FOR SAMSUNG/ANDROID ===== */
 .mobile-menu {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0; /* Changed from right: -100% */
     width: 100%;
-    height: 100vh;
+    height: 100dvh; /* Changed to dvh for better Android support */
     background: var(--mamba-dark);
     z-index: 1001;
-    transition: right 0.3s ease;
+    transition: transform 0.3s ease; /* Changed from right to transform */
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
     padding-top: 0;
+    transform: translateX(100%); /* Use transform instead of right positioning */
 }
 
 .mobile-menu.active {
-    right: 0;
+    transform: translateX(0); /* Changed from right: 0 */
 }
 
 /* Mamba Logo in Mobile Menu - Larger */
@@ -291,6 +292,16 @@ strong {
     padding-left: 0;
     transform: translateX(5px);
     text-shadow: 0 0 10px rgba(153, 255, 0, 0.5);
+}
+
+/* ===== BODY SCROLL LOCK FIXES ===== */
+body.menu-open {
+    overflow: hidden !important;
+}
+
+/* Make sure mobile menu closes properly */
+.mobile-menu {
+    transition: transform 0.3s ease !important;
 }
 
 /* ===== HEADER ===== */
@@ -395,7 +406,7 @@ strong {
     left: 8px;
 }
 
-/* ===== CONTACT HERO ===== */
+/* ===== CONTACT HERO - UPDATED WITH REDUCED MOBILE PADDING ===== */
 .contact-hero {
     background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('contacthero.jpg');
     background-size: cover;
@@ -838,8 +849,30 @@ strong {
     font-size: 0.95rem;
 }
 
-
 /* ===== CONTACT CTA ===== */
+.contact-cta {
+    background: linear-gradient(135deg, var(--mamba-gray) 0%, var(--mamba-dark) 100%);
+    padding: clamp(60px, 10vw, 80px) 0;
+    text-align: center;
+}
+
+.contact-cta h2 {
+    color: var(--mamba-text);
+    margin-bottom: 20px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.contact-cta h2 span {
+    color: var(--mamba-green);
+}
+
+.contact-cta p {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--mamba-text);
+    margin: 0 auto 30px;
+    max-width: 700px;
+}
+
 /* ===== CONTACT CTA BUTTONS FIX ===== */
 .cta-buttons {
     display: flex;
@@ -871,65 +904,6 @@ strong {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Add responsive adjustments for mobile */
-@media (max-width: 767px) {
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .cta-buttons .btn {
-        width: 100%;
-        max-width: 300px;
-        min-width: auto;
-    }
-    
-    .contact-cta h2 {
-        font-size: 1.8rem;
-    }
-    
-    .contact-cta p {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 424px) {
-    .cta-buttons {
-        gap: 15px;
-    }
-    
-    .cta-buttons .btn {
-        padding: 12px 20px;
-        font-size: 1rem;
-    }
-}
-.contact-cta {
-    background: linear-gradient(135deg, var(--mamba-gray) 0%, var(--mamba-dark) 100%);
-    padding: clamp(60px, 10vw, 80px) 0;
-    text-align: center;
-}
-
-.contact-cta h2 {
-    color: var(--mamba-text);
-    margin-bottom: 20px;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-}
-
-.contact-cta h2 span {
-    color: var(--mamba-green);
-}
-
-.contact-cta p {
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    color: var(--mamba-text);
-    margin: 0 auto 30px;
-    max-width: 700px;
 }
 
 /* ===== FLOAT UP ANIMATION ===== */
@@ -1234,7 +1208,7 @@ strong {
 }
 
 /* =========================================== */
-/* ========== RESPONSIVE DESIGN ========== */
+/* ========== RESPONSIVE DESIGN - FIXED ========== */
 /* =========================================== */
 
 /* DESKTOP: Show normal header, hide hamburger (1025px and above) */
@@ -1327,6 +1301,16 @@ strong {
         gap: 40px;
     }
     
+    /* REDUCED HERO PADDING FOR TABLET */
+    .contact-hero {
+        padding: 90px 0 50px;
+        min-height: 60vh;
+    }
+    
+    .contact-hero h1 {
+        font-size: 2.2rem;
+    }
+    
     /* FOOTER FIXES FOR TABLET */
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
@@ -1397,8 +1381,10 @@ strong {
         max-width: 220px;
     }
     
+    /* REDUCED HERO PADDING FOR LARGE PHONES */
     .contact-hero {
         padding: 80px 0 40px;
+        min-height: 60vh;
     }
     
     .contact-hero h1 {
@@ -1556,8 +1542,10 @@ strong {
         max-width: 200px;
     }
     
+    /* REDUCED HERO PADDING FOR MEDIUM PHONES */
     .contact-hero {
         padding: 70px 0 30px;
+        min-height: 55vh;
     }
     
     .contact-hero h1 {
@@ -1626,6 +1614,12 @@ strong {
         max-width: 180px;
     }
     
+    /* REDUCED HERO PADDING FOR SMALL PHONES */
+    .contact-hero {
+        padding: 70px 0 30px;
+        min-height: 55vh;
+    }
+    
     .contact-hero h1 {
         font-size: 1.6rem;
     }
@@ -1677,6 +1671,12 @@ strong {
     .mobile-logo-image {
         height: 60px;
         max-width: 160px;
+    }
+    
+    /* REDUCED HERO PADDING FOR VERY SMALL PHONES */
+    .contact-hero {
+        padding: 60px 0 25px;
+        min-height: 50vh;
     }
     
     .contact-hero h1 {
@@ -1865,5 +1865,70 @@ img {
     
     .footer {
         padding-bottom: max(30px, env(safe-area-inset-bottom));
+    }
+}
+
+/* ===== SAMSUNG NUCLEAR FIXES ===== */
+/* Force mobile menu closed initially */
+#mobileMenu {
+    transform: translateX(100%) !important;
+    -webkit-transform: translateX(100%) !important;
+    transition: transform 0.3s ease !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+}
+
+#mobileMenu.active {
+    transform: translateX(0) !important;
+    -webkit-transform: translateX(0) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Force body to not scroll when menu is open */
+body.menu-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+}
+
+/* Samsung specific tap highlight fix */
+* {
+    -webkit-tap-highlight-color: transparent !important;
+    tap-highlight-color: transparent !important;
+}
+
+/* Ensure WhatsApp button is visible */
+.whatsapp-float {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+}
+
+/* Samsung Internet Browser */
+@supports (-webkit-touch-callout: none) {
+    .mobile-menu {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Samsung WebKit browsers */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .mobile-menu {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    
+    .mobile-menu.active {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    
+    /* Fix for Samsung's tap highlight */
+    * {
+        -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
     }
 }
